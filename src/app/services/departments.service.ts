@@ -8,7 +8,7 @@ import { DepartmentDto } from '../models/department.model';
 })
 export class DepartmentsService {
 
-  private  root = "/api/intervals"
+  private  root = "/api/departments"
   constructor(private http: HttpClient) { }
 
   public getDepartment(departmentId: number): Observable<DepartmentDto> {
@@ -17,5 +17,13 @@ export class DepartmentsService {
 
   public getSubdivisionDepartments(subdivisionId: number): Observable<DepartmentDto[]> {
     return this.http.get<DepartmentDto[]>(this.root + "/subdivision-departments/" + subdivisionId);
+  }
+
+  public addDepartment(department: DepartmentDto): Observable<any> {
+    return this.http.post(this.root, department);
+  }
+
+  public updateDepartment(department: DepartmentDto): Observable<any> {
+    return this.http.put(this.root, department);
   }
 }

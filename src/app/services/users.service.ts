@@ -34,4 +34,8 @@ export class UsersService {
   public getSubdivisionUsers(subdivisionId: number): Observable<UserDto[]> {
     return this.http.get<UserDto[]>(this.root + "/subdivision/" + subdivisionId);
   }
+
+  public updateUser(user: UserDto): Observable<any> {
+    return this.http.put(this.root, user);
+  }
 }

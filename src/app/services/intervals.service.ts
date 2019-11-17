@@ -14,12 +14,12 @@ export class IntervalsService {
   public getInterval(intervalId: number): Observable<IntervalDto> {
     return this.http.get<IntervalDto>(this.root + "/" + intervalId);
   }
-  
-  public addInterval(interval: IntervalDto): Observable<any> {
-    return this.http.post(this.root, interval);
-  }
 
   public getTaskIntervals(taskId: number): Observable<IntervalDto[]> {
     return this.http.get<IntervalDto[]>(this.root + "/task-intervals/" + taskId);
+  }
+
+  public addInterval(interval: IntervalDto): Observable<any> {
+    return this.http.post(this.root, interval);
   }
 }
