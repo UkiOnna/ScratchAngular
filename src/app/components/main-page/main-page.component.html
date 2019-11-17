@@ -1,1 +1,30 @@
-<p>main-page works!</p>
+<div class="container wrap">
+  <div class="row">
+    <div class="col-12 px-0">
+      <div class="header">
+        <div class="title">
+          Учет рабочего времени
+        </div>
+        <div class="control-box">
+          <div class="left d-inline-block py-3">
+            <span class="username">Lastname Firstname</span>
+            <button class="person-statistic-btn" mat-raised-button color="primary">Персональная статистика</button>
+          </div>
+          <div class="right d-inline">
+            <mat-form-field class="date-form-field">
+              <input matInput [matDatepicker]="taskDate" placeholder="Дата" [value]="taskDate.value">
+              <mat-datepicker-toggle matSuffix [for]="taskDate"></mat-datepicker-toggle>
+              <mat-datepicker #taskDate></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="search-form-field">
+              <input matInput type="text" placeholder="Поиск" [(ngModel)]="searchValue">
+              <button mat-button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

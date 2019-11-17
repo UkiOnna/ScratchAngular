@@ -1,0 +1,36 @@
+.wrap {
+  .header {
+    .title {
+      text-align: center;
+      font-size: 36px;
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+
+    .control-box {
+      border-top: 1px solid lightgray;
+
+      .left {
+        margin-left: 0px;
+        margin-right: auto;
+
+        .username {
+          font-size: 18px;
+          font-weight: 500;
+        }
+
+        .person-statistic-btn {
+          margin-left: 5px;
+        }
+      }
+
+      .right {
+        float: right;
+
+        .date-form-field {
+          margin-right: 7px;
+        }
+      }
+    }
+  }
+}
