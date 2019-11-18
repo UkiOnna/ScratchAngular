@@ -23,7 +23,7 @@ export class TasksService {
     return this.http.delete(this.root + "/" + taskId);
   }
 
-  public getUserTasks(userId: number): Observable<TaskDto[]> {
-    return this.http.get<TaskDto[]>(this.root + "/user-tasks/" + userId);
+  public getUserTasks(userId: number, date: Date): Observable<TaskDto[]> {
+    return this.http.get<TaskDto[]>(this.root + "/user-tasks/" + userId + "/" + date);
   }
 }
