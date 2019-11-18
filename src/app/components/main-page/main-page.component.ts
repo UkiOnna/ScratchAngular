@@ -18,7 +18,7 @@ export class MainPageComponent implements OnInit {
   taskDate = new FormControl(new Date());
   searchValue = '';
 
-  tasks: TaskViewModel[];
+  tasks: TaskViewModel[] = [];
 
   constructor(private tasksService: TasksService,
     private intervalsService: IntervalsService,
@@ -37,7 +37,7 @@ export class MainPageComponent implements OnInit {
                 forEach(interval => isWork = this.dateIsInRange(i, interval.start, interval.end));
               let intervalCell: IntervalCellViewModel = {
                 hour: i,
-                isWork: false
+                isWork: isWork
               }
             }
 
@@ -55,6 +55,8 @@ export class MainPageComponent implements OnInit {
   }
 
   private dateIsInRange(requiredHour, startDate, endDate): boolean {
-    return false;
+    let date = this.taskDate.value;
+    date.hour = requiredHour;
+    return startDate <= date >= endDate;
   }
 }
