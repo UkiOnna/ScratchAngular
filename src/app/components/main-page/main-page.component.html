@@ -17,12 +17,44 @@
               <mat-datepicker #taskDate></mat-datepicker>
             </mat-form-field>
             <mat-form-field class="search-form-field">
-              <input matInput type="text" placeholder="Поиск" [(ngModel)]="searchValue">
-              <button mat-button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
+              <input matInput type="text" placeholder="Поиск" (keyup)="applyFilter($event.target.value)"
+                [(ngModel)]="searchValue">
+              <button mat-button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear"
+                (click)="searchValue=''">
                 <mat-icon>close</mat-icon>
               </button>
             </mat-form-field>
           </div>
+        </div>
+      </div>
+      <div class="body">
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource" matSort>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="progress">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Progress </th>
+              <td mat-cell *matCellDef="let row"> {{row.progress}}% </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+              <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+            </ng-container>
+
+            <!-- Color Column -->
+            <ng-container matColumnDef="color">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Color </th>
+              <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.color}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+          </table>
+
+          <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
         </div>
       </div>
     </div>

@@ -1,3 +1,5 @@
+import { IntervalCellViewModel } from './interval.model';
+
 export class TaskDto {
   id: number;
   title: string;
@@ -5,4 +7,11 @@ export class TaskDto {
   comment: string;
   creatorId: number;
   projectId: number;
+}
+
+export class TaskViewModel {
+  id: number;
+  projectName: string;
+  taskName: string;
+  intervalCells: IntervalCellViewModel[];
 }

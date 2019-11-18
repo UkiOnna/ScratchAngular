@@ -19,4 +19,8 @@ export class ProjectsService {
   public getProjects(): Observable<ProjectDto[]> {
     return this.http.get<ProjectDto[]>(this.root);
   }
+
+  public getUserProjects(userId: number): Observable<ProjectDto[]> {
+    return this.http.get<ProjectDto[]>(this.root + "/" + userId);
+  }
 }

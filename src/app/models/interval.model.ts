@@ -5,3 +5,8 @@ export class IntervalDto {
   taskId: number;
   userId: number;
 }
+
+export class IntervalCellViewModel {
+  hour: number;
+  isWork: boolean;
+}
