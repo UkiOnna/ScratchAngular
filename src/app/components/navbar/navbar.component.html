@@ -1,33 +1,22 @@
-<div class="container-fluid py-0 w-100">
-  <div class="row">
-    <div class="col-12 px-0">
-      <nav class="navbar navbar-expand navbar-dark bg-dark w-100">
-        <a class="navbar-brand" href="#">Scratch</a>
-        <div class="collapse navbar-collapse">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Главная <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Статистика по департаменту</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Статистика по подразделениям</a>
-          </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Добавить задачу</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Добавить пользователя</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Выйти <span class="sr-only">(current)</span></a>
-          </li>
-        </ul>
-      </div>
-      </nav>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-button>Главная</button>
+    <button mat-button>Статистика по департаменту</button>
+    <button mat-button>Статистика по подразделениям</button>
+    <div class="navbar-right">
+      <button mat-button [matMenuTriggerFor]="menu">Дополнительно</button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [matMenuTriggerFor]="add">Добавить</button>
+        <button mat-menu-item [matMenuTriggerFor]="add">Редактировать</button>
+        <button mat-menu-item [matMenuTriggerFor]="add">Удалить</button>
+        <mat-menu #add="matMenu">
+          <button mat-menu-item>Пользователя</button>
+          <button mat-menu-item>Проект</button>
+          <button mat-menu-item>Департамент</button>
+          <button mat-menu-item>Подразделение</button>
+          <button mat-menu-item>Задачу</button>
+        </mat-menu>
+      </mat-menu>
+      <button mat-button>Выход</button>
     </div>
-  </div>
-</div>
+  </mat-toolbar-row>
