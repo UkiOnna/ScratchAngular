@@ -36,6 +36,6 @@ export class UsersService {
   }
 
   public updateUser(user: UserDto): Observable<any> {
-    return this.http.put(this.root, user);
+    return this.http.put(this.root + "/" + user.id, user);
   }
 }

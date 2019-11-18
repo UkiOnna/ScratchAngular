@@ -19,6 +19,10 @@ export class IntervalsService {
     return this.http.get<IntervalDto[]>(this.root + "/task-intervals/" + taskId);
   }
 
+  public getUserIntervals(userId: number): Observable<IntervalDto[]> {
+    return this.http.get<IntervalDto[]>(this.root + "/user-intervals/" + userId);
+  }
+
   public addInterval(interval: IntervalDto): Observable<any> {
     return this.http.post(this.root, interval);
   }

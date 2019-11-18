@@ -24,6 +24,6 @@ export class DepartmentsService {
   }
 
   public updateDepartment(department: DepartmentDto): Observable<any> {
-    return this.http.put(this.root, department);
+    return this.http.put(this.root + "/" + department.id, department);
   }
 }

@@ -24,6 +24,6 @@ export class SubdivisionsService {
   }
 
   public updateSubdivision(subdivision: SubdivisionDto): Observable<any> {
-    return this.http.put(this.root, subdivision);
+    return this.http.put(this.root + "/" + subdivision.id, subdivision);
   }
 }
