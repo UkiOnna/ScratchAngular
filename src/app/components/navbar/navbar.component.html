@@ -1,22 +1,24 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
     <button mat-button>Главная</button>
-    <button mat-button>Статистика по департаменту</button>
-    <button mat-button>Статистика по подразделениям</button>
+    <button *ngIf="isAdmin||isDepartment||isDivision" mat-button>Статистика по департаменту</button>
+    <button *ngIf="isAdmin||isDivision" mat-button>Статистика по подразделениям</button>
     <div class="navbar-right">
       <button mat-button [matMenuTriggerFor]="menu">Дополнительно</button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item [matMenuTriggerFor]="add">Добавить</button>
-        <button mat-menu-item [matMenuTriggerFor]="add">Редактировать</button>
-        <button mat-menu-item [matMenuTriggerFor]="add">Удалить</button>
+        <button *ngIf="isAdmin" mat-menu-item [matMenuTriggerFor]="add">Редактировать</button>
+        <button *ngIf="isAdmin" mat-menu-item [matMenuTriggerFor]="add">Удалить</button>
         <mat-menu #add="matMenu">
-          <button mat-menu-item>Пользователя</button>
-          <button mat-menu-item>Проект</button>
-          <button mat-menu-item>Департамент</button>
-          <button mat-menu-item>Подразделение</button>
+          <button *ngIf="isAdmin" mat-menu-item>Пользователя</button>
+          <button *ngIf="isAdmin||isDepartment||isDivision" mat-menu-item>Проект</button>
+          <button *ngIf="isAdmin||isDivision" mat-menu-item>Департамент</button>
+          <button *ngIf="isAdmin" mat-menu-item>Подразделение</button>
           <button mat-menu-item>Задачу</button>
         </mat-menu>
       </mat-menu>
-      <button mat-button>Выход</button>
+      <div *ngIf="isLogin; then thenBlock else elseBlock"></div>
+      <ng-template #thenBlock><button mat-button>Выход</button></ng-template>
+      <ng-template #elseBlock><button mat-button>Вход</button></ng-template>
     </div>
   </mat-toolbar-row>

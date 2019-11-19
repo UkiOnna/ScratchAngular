@@ -27,6 +27,10 @@ export class UsersService {
     return this.http.get<UserDto>(this.root + "/" + userId);
   }
 
+  public getUserByToken(userToken: string): Observable<UserDto> {
+    return this.http.get<UserDto>(this.root + "/" + userToken);
+  }
+
   public getDepartmentUsers(departmentId: number): Observable<UserDto[]> {
     return this.http.get<UserDto[]>(this.root + "/department/" + departmentId);
   }
