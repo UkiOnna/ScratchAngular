@@ -8,33 +8,32 @@ import { CookieService } from 'ngx-cookie-service';
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss']
-  
+
 })
 export class SignInComponent implements OnInit {
   public login: string = '';
   public password: string = '';
+  public isError: boolean = false;
 
-  constructor(private router: Router, private usersService: UsersService,private cookieService : CookieService) { }
+  constructor(private router: Router, private usersService: UsersService, private cookieService: CookieService) { }
 
   ngOnInit() {
   }
 
-  public signIn(){
-    if(this.login && this.password){
+  public signIn() {
+    if (this.login && this.password) {
       let user: UserLoginDto = { login: this.login, password: this.password };
-    this.usersService.signIn(user).subscribe(result => this.goToProfile(result));
+      this.usersService.signIn(user).subscribe(result => this.goToProfile(result));
     }
   }
 
   public goToProfile(result: string) {
-    if (!!result)
-    {
-      this.cookieService.set('token',result);
+    if (!!result) {
+      this.cookieService.set('token', result);
       this.router.navigate(['/main-page/']);
     }
-    else
-    {
-      
+    else {
+      this.isError=true
     }
   }
 
