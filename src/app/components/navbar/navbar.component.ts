@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { UsersService } from 'src/app/services/users.service';
 import { UserDto } from 'src/app/models/user.model';
+import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-navbar',
@@ -9,11 +10,11 @@ import { UserDto } from 'src/app/models/user.model';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  public isAdmin: boolean = false;
+  public isAdmin: boolean = true;
   public isLogin: boolean = false;
   public isDepartment: boolean = false;
   public isDivision: boolean = false;
-  constructor(private cookieService: CookieService, private userSerivce: UsersService) { }
+  constructor(private cookieService: CookieService, private userSerivce: UsersService,public dialog: MatDialog) { }
 
   ngOnInit() {
     let cookieValue = this.cookieService.get("token");
@@ -36,5 +37,25 @@ export class NavbarComponent implements OnInit {
       this.isLogin = false;
     }
   }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogAddUser, {
+      height: '550px',
+      width: '400px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+
+}
+}
+
+@Component({
+  selector: 'dialogAddUser',
+  templateUrl: 'dialogAddUser.html',
+})
+export class DialogAddUser {
+
+  constructor( public dialogRef: MatDialogRef<DialogAddUser>){}
 
 }

@@ -1,0 +1,35 @@
+<h1 mat-dialog-title>Добавление пользователя</h1>
+<div mat-dialog-content>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Имя" value="">
+  </mat-form-field>
+  <br>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Фамилия">
+  </mat-form-field>
+  <br>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Отчество">
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <mat-label>Роль</mat-label>
+    <mat-select value="Роль">
+      <mat-option value="Администратор">Администратор</mat-option>
+      <mat-option value="Руководитель">Руководитель департамента</mat-option>
+      <mat-option value="Руководитель">Руководитель подразделения</mat-option>
+      <mat-option value="Сотрудник">Сотрудник</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <mat-label>Департамент</mat-label>
+    <mat-select value="Департамент">
+      <mat-option value="Название департамента">Название департамента</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button>Добавить</button>
+  <button mat-button cdkFocusInitial>Отмена</button>
+</div>
