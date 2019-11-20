@@ -46,6 +46,7 @@ export class MainPageComponent implements OnInit {
                 hour: i,
                 isWork: isWork
               }
+              intervalCells.push(intervalCell);
             }
 
             let element: TaskViewModel = {
