@@ -18,6 +18,8 @@ export class MainPageComponent implements OnInit {
   taskDate = new FormControl(new Date());
   searchValue = '';
 
+  displayedColumns: string[] = ['id', 'projectName', 'taskName'];
+  hoursColumns: string[] = [];
   tasks: TaskViewModel[] = [];
 
   constructor(private tasksService: TasksService,
@@ -25,6 +27,11 @@ export class MainPageComponent implements OnInit {
     private projectsService: ProjectsService) { }
 
   ngOnInit() {
+    for (let i = 7; i <= 22; i++) {
+      this.displayedColumns.push(i.toString());
+      this.hoursColumns.push(i.toString());
+    }
+
     this.tasksService.getUserTasks(this.user.id, this.taskDate.value).subscribe(tasks => {
       this.intervalsService.getUserIntervals(this.user.id).subscribe(intervals => {
         this.projectsService.getUserProjects(this.user.id).subscribe(projects => {
@@ -58,5 +65,9 @@ export class MainPageComponent implements OnInit {
     let date = this.taskDate.value;
     date.hour = requiredHour;
     return startDate <= date >= endDate;
+  }
+
+  public getNumber(str: string): number {
+    return Number.parseInt(str);
   }
 }
