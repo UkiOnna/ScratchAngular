@@ -1,42 +1,47 @@
-<h4 mat-dialog-title>Добавление пользователя</h4>
-<div mat-dialog-content>
-  <mat-form-field class="example-full-width">
-    <input [(ngModel)]="name" matInput placeholder="Имя" value="">
-  </mat-form-field>
-  <br>
-  <mat-form-field class="example-full-width">
-    <input [(ngModel)]="lastname" matInput placeholder="Фамилия">
-  </mat-form-field>
-  <br>
-  <mat-form-field class="example-full-width">
-    <input [(ngModel)]="middlename" matInput placeholder="Отчество">
-  </mat-form-field>
-  <br>
-  <mat-form-field>
-    <mat-label>Роль</mat-label>
-    <mat-select value="Роль">
-      <mat-option value="Администратор">Администратор</mat-option>
-      <mat-option value="Руководитель">Руководитель департамента</mat-option>
-      <mat-option value="Руководитель">Руководитель подразделения</mat-option>
-      <mat-option value="Сотрудник">Сотрудник</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <br>
-  <mat-form-field>
-    <mat-label>Подразделение</mat-label>
-    <mat-select value="Подразделение">
-      <mat-option *ngFor="let item of subDivisions" [value]="item.name">{{item.name}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <br>
-  <mat-form-field>
-    <mat-label>Департамент</mat-label>
-    <mat-select value="Департамент">
-      <mat-option value="Название департамента">Название департамента</mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onYesClick()">Добавить</button>
-  <button mat-button (click)="onNoClick()">Отмена</button>
+<div class="text-center">
+  <h4 mat-dialog-title>Добавление пользователя</h4>
+  <div mat-dialog-content>
+    <mat-form-field class="example-full-width">
+      <input [(ngModel)]="name" matInput placeholder="Имя" value="">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width">
+      <input [(ngModel)]="lastname" matInput placeholder="Фамилия">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width">
+      <input [(ngModel)]="middlename" matInput placeholder="Отчество">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-label>Роль</mat-label>
+      <mat-select value="Роль">
+        <mat-option value="Администратор">Администратор</mat-option>
+        <mat-option value="Руководитель">Руководитель департамента</mat-option>
+        <mat-option value="Руководитель">Руководитель подразделения</mat-option>
+        <mat-option value="Сотрудник">Сотрудник</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-label>Подразделение</mat-label>
+      <mat-select placeholder="Подразделение" (selectionChange)="subDivisionChanged($event.value)">
+        <mat-option *ngFor="let item of subDivisions" [value]="item.id">{{item.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-label>Департамент</mat-label>
+      <mat-select placeholder="Департамент">
+        <mat-option *ngFor="let item of departaments" [value]="item.id">{{item.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onYesClick()">Добавить</button>
+    <button mat-button (click)="onNoClick()">Отмена</button>
+  </div>
+  <div class="mt-2">
+    <mat-label *ngIf="isError">Не все поля правильно заполнены</mat-label>
+  </div>
 </div>
