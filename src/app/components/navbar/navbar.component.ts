@@ -3,6 +3,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { UsersService } from 'src/app/services/users.service';
 import { MatDialog } from '@angular/material';
 import { DialogAddUser } from '../dialogs/dialog-add-user/dialog-add-user.component';
+import { DialogAddTaskComponent } from '../dialogs/dialog-add-task/dialog-add-task.component';
 
 @Component({
   selector: 'app-navbar',
@@ -14,6 +15,7 @@ export class NavbarComponent implements OnInit {
   public isLogin: boolean = false;
   public isDepartment: boolean = false;
   public isDivision: boolean = false;
+  userId:number;
   constructor(private cookieService: CookieService, private userSerivce: UsersService, public dialog: MatDialog) { }
 
   ngOnInit() {
@@ -30,6 +32,7 @@ export class NavbarComponent implements OnInit {
           case 3:
             this.isDepartment = true;
         }
+        this.userId=user.id;
       });
       this.isLogin = true;
     }
@@ -37,16 +40,21 @@ export class NavbarComponent implements OnInit {
       this.isLogin = false;
     }
   }
-  openDialog(): void {
+  openCreateUserDialog(): void {
     const dialogRef = this.dialog.open(DialogAddUser, {
       height: '550px',
       width: '400px'
     });
+  }
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+  openCreateTaskDialog(): void {
+    const dialogRef = this.dialog.open(DialogAddTaskComponent, {
+      height: '430px',
+      width: '400px',
+      data:{
+        userId:this.userId
+      }
     });
-
   }
 }
 

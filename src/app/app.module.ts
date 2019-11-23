@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { DialogAddUser } from './components/dialogs/dialog-add-user/dialog-add-user.component';
+import { DialogAddTaskComponent } from './components/dialogs/dialog-add-task/dialog-add-task.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { DialogAddUser } from './components/dialogs/dialog-add-user/dialog-add-u
     NavbarComponent,
     FooterComponent,
     DialogAddUser,
+    DialogAddTaskComponent
   ],
   imports: [
     BrowserModule,

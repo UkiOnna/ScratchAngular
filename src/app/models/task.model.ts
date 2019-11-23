@@ -3,6 +3,7 @@ export class TaskDto {
   title: string;
   description: string;
   comment: string;
+  deadline: Date;
   creatorId: number;
   projectId: number;
 }

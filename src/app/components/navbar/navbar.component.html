@@ -11,11 +11,11 @@
         <button *ngIf="isAdmin" mat-menu-item [matMenuTriggerFor]="delete">Удалить</button>
 
         <mat-menu #add="matMenu">
-          <button *ngIf="isAdmin" mat-menu-item (click)="openDialog()">Пользователя</button>
+          <button *ngIf="isAdmin" mat-menu-item (click)="openCreateUserDialog()">Пользователя</button>
           <button *ngIf="isAdmin||isDepartment||isDivision" mat-menu-item>Проект</button>
           <button *ngIf="isAdmin||isDivision" mat-menu-item>Департамент</button>
           <button *ngIf="isAdmin" mat-menu-item>Подразделение</button>
-          <button mat-menu-item>Задачу</button>
+          <button mat-menu-item (click)="openCreateTaskDialog()">Задачу</button>
         </mat-menu>
 
         <mat-menu #edit="matMenu">

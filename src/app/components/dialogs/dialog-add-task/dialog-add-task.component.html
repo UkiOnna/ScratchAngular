@@ -1,0 +1,32 @@
+<div class="text-center">
+  <h4 mat-dialog-title>Добавление задачи</h4>
+  <div mat-dialog-content>
+    <mat-form-field class="example-full-width">
+      <input [(ngModel)]="name" matInput placeholder="Название" value="">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width">
+      <textarea [(ngModel)]="decription" matInput placeholder="Описание"></textarea>
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width">
+      <input  matInput [matDatepicker]="picker" placeholder="Дедлайн">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker (selectedChanged)="cahngeDate($event.value)"></mat-datepicker>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-label>Проект</mat-label>
+      <mat-select placeholder="Проект" (selectionChange)="projectChanged($event.value)">
+        <mat-option *ngFor="let item of projects" [value]="item.id">{{item.title}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onYesClick()">Добавить</button>
+    <button mat-button (click)="onNoClick()">Отмена</button>
+  </div>
+  <div class="mt-2">
+    <mat-label *ngIf="isError">Не все поля правильно заполнены</mat-label>
+  </div>
+</div>

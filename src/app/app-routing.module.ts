@@ -5,6 +5,7 @@ import { MainPageComponent } from './components/main-page/main-page.component';
 import { CookieService } from 'ngx-cookie-service';
 import { PersonalStatisticComponent } from './components/personal-statistic/personal-statistic.component';
 import { DialogAddUser } from './components/dialogs/dialog-add-user/dialog-add-user.component';
+import { DialogAddTaskComponent } from './components/dialogs/dialog-add-task/dialog-add-task.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,6 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
   providers: [CookieService],
-  entryComponents:[DialogAddUser]
+  entryComponents:[DialogAddUser,DialogAddTaskComponent]
 })
 export class AppRoutingModule { }
