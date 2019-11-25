@@ -1,8 +1,8 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <button mat-button>Главная</button>
-    <button *ngIf="isAdmin||isDepartment||isDivision" mat-button>Статистика по департаменту</button>
-    <button *ngIf="isAdmin||isDivision" mat-button>Статистика по подразделениям</button>
+    <button mat-button routerLink="/main-page" >Главная</button>
+    <button routerLink="/projects" *ngIf="isAdmin||isDepartment||isDivision" mat-button>Статистика по департаменту</button>
+    <button routerLink="/departments"  *ngIf="isAdmin||isDivision" mat-button>Статистика по подразделениям</button>
     <div class="navbar-right">
       <button mat-button [matMenuTriggerFor]="menu">Дополнительно</button>
       <mat-menu #menu="matMenu">

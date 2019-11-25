@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit {
   public isLogin: boolean = false;
   public isDepartment: boolean = false;
   public isDivision: boolean = false;
-  userId:number;
+  userId: number;
   constructor(private cookieService: CookieService, private userSerivce: UsersService, public dialog: MatDialog) { }
 
   ngOnInit() {
@@ -32,7 +32,7 @@ export class NavbarComponent implements OnInit {
           case 3:
             this.isDepartment = true;
         }
-        this.userId=user.id;
+        this.userId = user.id;
       });
       this.isLogin = true;
     }
@@ -51,8 +51,8 @@ export class NavbarComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogAddTaskComponent, {
       height: '430px',
       width: '400px',
-      data:{
-        userId:this.userId
+      data: {
+        userId: this.userId
       }
     });
   }

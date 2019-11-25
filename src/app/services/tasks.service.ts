@@ -9,7 +9,7 @@ import { TaskPersonStatisticDto } from '../models/Dtos/taskPersonStatistic.model
 })
 export class TasksService {
 
-  private  root = "/api/tasks"
+  private root = "/api/tasks"
   constructor(private http: HttpClient) { }
 
   public getTask(taskId: number): Observable<TaskDto> {
@@ -22,6 +22,10 @@ export class TasksService {
 
   public deleteTask(taskId: number): Observable<any> {
     return this.http.delete(this.root + "/" + taskId);
+  }
+
+  public updateTask(task: TaskDto): Observable<any> {
+    return this.http.put(this.root + '/' + task.id, task);
   }
 
   public getUserTasks(userId: number, date: Date): Observable<TaskDto[]> {

@@ -6,11 +6,11 @@
     </mat-form-field>
     <br>
     <mat-form-field class="example-full-width">
-      <textarea [(ngModel)]="decription" matInput placeholder="Описание"></textarea>
+      <textarea [(ngModel)]="description" matInput placeholder="Описание"></textarea>
     </mat-form-field>
     <br>
     <mat-form-field class="example-full-width">
-      <input  matInput [matDatepicker]="deadline" placeholder="Дедлайн">
+      <input  matInput [matDatepicker]="deadline" [value]="deadline.value" placeholder="Дедлайн" (dateChange)="updateDate($event.value)">
       <mat-datepicker-toggle matSuffix [for]="deadline"></mat-datepicker-toggle>
       <mat-datepicker #deadline></mat-datepicker>
     </mat-form-field>

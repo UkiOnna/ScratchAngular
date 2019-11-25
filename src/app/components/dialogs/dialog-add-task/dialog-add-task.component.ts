@@ -25,7 +25,6 @@ export class DialogAddTaskComponent implements OnInit {
 
   ngOnInit() {
     this.userId = this.data["userId"];
-
     this.projectService.getProjects().subscribe(projects => {
       this.projects = projects;
     });
@@ -35,15 +34,25 @@ export class DialogAddTaskComponent implements OnInit {
     this.selectedProjectId = value;
   }
 
+  updateDate(value): void{
+    let newDate = new Date(value);
+    this.deadline.setValue(newDate);
+  }
+
   onNoClick(): void {
     this.dialogRef.close();
   }
   onYesClick(): void {
-    if (this.name && this.deadline && this.description) {
-      this.task.description = this.description;
-      this.task.deadline = this.deadline.value;
-      this.task.title = this.name;
-      this.task.creatorId = this.userId;
+    if (!!this.name && this.deadline && this.description && this.selectedProjectId) {
+      this.task={
+        description: this.description,
+        deadline: this.deadline.value,
+        title:this.name,
+        creatorId:this.userId,
+        projectId:this.selectedProjectId,
+        id:null,
+        comment:null
+      };
       this.taskService.addTask(this.task);
       this.dialogRef.close();
     }
