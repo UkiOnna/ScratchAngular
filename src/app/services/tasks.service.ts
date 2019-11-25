@@ -35,4 +35,8 @@ export class TasksService {
   public getPersonalStatisticTasks(userId: number, startDate: Date, endDate: Date): Observable<TaskPersonStatisticDto[]> {
     return this.http.get<TaskPersonStatisticDto[]>(this.root + "/personal-statistics/" + userId + "/" + startDate + "/" + endDate);
   }
+
+  public getProjectUserWorkOnTheTasks(projectId: number, startDate: Date, endDate: Date) {
+    return this.http.get<TaskPersonStatisticDto[]>(this.root + "/project/" + projectId + "/" + startDate + "/" + endDate);
+  }
 }
