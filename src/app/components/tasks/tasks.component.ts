@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TaskPersonStatisticDto } from 'src/app/models/Dtos/taskPersonStatistic.model';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-tasks',

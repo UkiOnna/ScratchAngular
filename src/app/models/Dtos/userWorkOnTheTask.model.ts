@@ -1,10 +1,10 @@
 export class TaskDto {
   id: number;
+  projectId: number;
   creatorId: number;
   title: string;
-  description: string;
-  comment: string;
   deadline: Date;
-  creatorId: number;
-  projectId: number;
+  todayWorkTime: Date;
+  allWorkTime: Date;
+  taskStatus: string;
 }
