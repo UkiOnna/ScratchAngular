@@ -10,9 +10,9 @@
     </mat-form-field>
     <br>
     <mat-form-field class="example-full-width">
-      <input  matInput [matDatepicker]="picker" placeholder="Дедлайн">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker (selectedChanged)="cahngeDate($event.value)"></mat-datepicker>
+      <input  matInput [matDatepicker]="deadline" placeholder="Дедлайн">
+      <mat-datepicker-toggle matSuffix [for]="deadline"></mat-datepicker-toggle>
+      <mat-datepicker #deadline></mat-datepicker>
     </mat-form-field>
     <br>
     <mat-form-field>
