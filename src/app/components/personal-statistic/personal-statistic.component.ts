@@ -25,13 +25,8 @@ export class PersonalStatisticComponent implements OnInit {
     private projectsService: ProjectsService) { }
 
   ngOnInit() {
-    this.tasksService.getUserTasksInRange(this.user.id, this.startDate.value, this.endDate.value).subscribe(tasks => {
-      
+    this.tasksService.getPersonalStatisticTasks(this.user.id, this.startDate.value, this.endDate.value).subscribe(result => {
+      this.tasks = result;
     });
-  }
-
-  private dateIsInRange(requiredDate, startDate, endDate): boolean {
-    let date = requiredDate;
-    return startDate <= date >= endDate;
   }
 }

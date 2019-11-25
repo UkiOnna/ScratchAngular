@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { TaskDto } from '../models/Dtos/task.model';
+import { TaskPersonStatisticDto } from '../models/Dtos/taskPersonStatistic.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ export class TasksService {
     return this.http.get<TaskDto[]>(this.root + "/user-tasks/" + userId + "/" + date);
   }
 
-  public getUserTasksInRange(userId: number, startDate: Date, endDate: Date): Observable<TaskDto[]> {
-    return this.http.get<TaskDto[]>(this.root + "/user-tasks-in-range/" + userId + "/" + startDate + "/" + endDate);
+  public getPersonalStatisticTasks(userId: number, startDate: Date, endDate: Date): Observable<TaskPersonStatisticDto[]> {
+    return this.http.get<TaskPersonStatisticDto[]>(this.root + "/personal-statistics/" + userId + "/" + startDate + "/" + endDate);
   }
 }
