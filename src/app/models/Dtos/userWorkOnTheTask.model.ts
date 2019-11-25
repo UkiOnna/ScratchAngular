@@ -1,4 +1,4 @@
-export class TaskDto {
+export class UserWorkOnTheTaskDto {
   id: number;
   projectId: number;
   creatorId: number;
