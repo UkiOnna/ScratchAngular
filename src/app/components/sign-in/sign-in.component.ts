@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
 import { Router } from '@angular/router';
-import { UserLoginDto } from 'src/app/models/user.model';
+import { UserLoginDto } from 'src/app/models/Dtos/user.model';
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({

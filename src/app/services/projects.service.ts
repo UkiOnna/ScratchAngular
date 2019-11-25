@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ProjectDto } from '../models/project.model';
+import { ProjectDto } from '../models/Dtos/project.model';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 

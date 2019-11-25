@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { UserDto } from 'src/app/models/user.model';
+import { UserDto } from 'src/app/models/Dtos/user.model';
 import { MatDialogRef } from '@angular/material';
 import { DepartmentsService } from 'src/app/services/departments.service';
 import { SubdivisionsService } from 'src/app/services/subdivisions.service';
 import { UsersService } from 'src/app/services/users.service';
-import { SubdivisionDto } from 'src/app/models/subdivision.model';
-import { DepartmentDto } from 'src/app/models/department.model';
+import { SubdivisionDto } from 'src/app/models/Dtos/subdivision.model';
+import { DepartmentDto } from 'src/app/models/Dtos/department.model';
 
 @Component({
   selector: 'dialogAddUser',

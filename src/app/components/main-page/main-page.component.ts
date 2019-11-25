@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { UserDto } from 'src/app/models/user.model';
+import { UserDto } from 'src/app/models/Dtos/user.model';
 import { FormControl } from '@angular/forms';
 import { TasksService } from 'src/app/services/tasks.service';
 import { IntervalsService } from 'src/app/services/intervals.service';
 import { ProjectsService } from 'src/app/services/projects.service';
-import { TaskViewModel } from 'src/app/models/taskView.model';
-import { IntervalCellViewModel } from 'src/app/models/intervalCellView.model';
+import { TaskViewModel } from 'src/app/models/Views/taskView.model';
+import { IntervalCellViewModel } from 'src/app/models/Views/intervalCellView.model';
 
 @Component({
   selector: 'app-main-page',

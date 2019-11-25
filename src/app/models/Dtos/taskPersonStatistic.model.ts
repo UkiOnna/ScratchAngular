@@ -1,4 +1,4 @@
-export class TaskPersonStatisticViewModel {
+export class TaskPersonStatisticDto {
   id: number;
   projectName: string;
   taskName: string;

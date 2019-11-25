@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { ProjectsService } from 'src/app/services/projects.service';
-import { ProjectDto } from 'src/app/models/project.model';
-import { TaskDto } from 'src/app/models/task.model';
+import { ProjectDto } from 'src/app/models/Dtos/project.model';
+import { TaskDto } from 'src/app/models/Dtos/task.model';
 import { TasksService } from 'src/app/services/tasks.service';
 import { FormControl } from '@angular/forms';
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IntervalDto } from '../models/interval.model';
+import { IntervalDto } from '../models/Dtos/interval.model';
 
 @Injectable({
   providedIn: 'root'

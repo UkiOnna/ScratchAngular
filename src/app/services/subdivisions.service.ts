@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { SubdivisionDto } from '../models/subdivision.model';
+import { SubdivisionDto } from '../models/Dtos/subdivision.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
