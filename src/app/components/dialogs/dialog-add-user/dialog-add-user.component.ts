@@ -6,6 +6,7 @@ import { SubdivisionsService } from 'src/app/services/subdivisions.service';
 import { UsersService } from 'src/app/services/users.service';
 import { SubdivisionDto } from 'src/app/models/Dtos/subdivision.model';
 import { DepartmentDto } from 'src/app/models/Dtos/department.model';
+import { RoleDto } from 'src/app/models/Dtos/role.model';
 
 @Component({
   selector: 'dialogAddUser',
@@ -15,13 +16,15 @@ import { DepartmentDto } from 'src/app/models/Dtos/department.model';
 export class DialogAddUser implements OnInit {
   public subDivisions: SubdivisionDto[] = [];
   public departaments: DepartmentDto[] = [];
+  public roles: RoleDto[] = [];
   public selectedDepartamentId: number;
   public selectedSubdivisionId: number;
+  public selectedRoleId: number;
   public name: string;
   public middlename: string;
   public lastname: string;
   user: UserDto;
-  isError:boolean=false;
+  isError: boolean = false;
 
   constructor(public dialogRef: MatDialogRef<DialogAddUser>, private departamentService: DepartmentsService, private subdivisionService: SubdivisionsService, private userService: UsersService) { }
 
@@ -41,20 +44,24 @@ export class DialogAddUser implements OnInit {
   departamentChanged(value): void {
     this.selectedDepartamentId = value;
   }
+  roleChanged(value): void {
+    this.selectedRoleId=value;
+  }
   onNoClick(): void {
     this.dialogRef.close();
   }
   onYesClick(): void {
-    if (this.name && this.lastname && this.middlename && this.selectedDepartamentId) {
+    if (this.name && this.lastname && this.middlename && this.selectedDepartamentId && this.selectedRoleId) {
       this.user.firstName = this.name;
       this.user.lastName = this.lastname;
       this.user.middleName = this.middlename;
       this.user.departmentId = this.selectedDepartamentId;
+      this.user.roleId=this.selectedRoleId;
       this.userService.updateUser(this.user);
       this.dialogRef.close();
     }
-    else{
-      this.isError=true;
+    else {
+      this.isError = true;
     }
   }
 
