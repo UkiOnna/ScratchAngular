@@ -8,6 +8,9 @@ import { DialogAddUser } from './components/dialogs/dialog-add-user/dialog-add-u
 import { DialogAddTaskComponent } from './components/dialogs/dialog-add-task/dialog-add-task.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { DepartmentsComponent } from './components/departments/departments.component';
+import { DialogAddProjectComponent } from './components/dialogs/dialog-add-project/dialog-add-project.component';
+import { DialogAddDepartamentComponent } from './components/dialogs/dialog-add-departament/dialog-add-departament.component';
+import { DialogAddSubdivisionComponent } from './components/dialogs/dialog-add-subdivision/dialog-add-subdivision.component';
 
 
 const routes: Routes = [
@@ -22,6 +25,6 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
   providers: [CookieService],
-  entryComponents:[DialogAddUser,DialogAddTaskComponent]
+  entryComponents:[DialogAddUser,DialogAddTaskComponent,DialogAddProjectComponent,DialogAddDepartamentComponent,DialogAddSubdivisionComponent]
 })
 export class AppRoutingModule { }

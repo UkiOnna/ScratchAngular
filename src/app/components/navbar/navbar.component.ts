@@ -4,6 +4,9 @@ import { UsersService } from 'src/app/services/users.service';
 import { MatDialog } from '@angular/material';
 import { DialogAddUser } from '../dialogs/dialog-add-user/dialog-add-user.component';
 import { DialogAddTaskComponent } from '../dialogs/dialog-add-task/dialog-add-task.component';
+import { DialogAddProjectComponent } from '../dialogs/dialog-add-project/dialog-add-project.component';
+import { DialogAddDepartamentComponent } from '../dialogs/dialog-add-departament/dialog-add-departament.component';
+import { DialogAddSubdivisionComponent } from '../dialogs/dialog-add-subdivision/dialog-add-subdivision.component';
 
 @Component({
   selector: 'app-navbar',
@@ -54,6 +57,27 @@ export class NavbarComponent implements OnInit {
       data: {
         userId: this.userId
       }
+    });
+  }
+
+  openCreateProjectDialog(): void {
+    this.dialog.open(DialogAddProjectComponent, {
+      height: '330px',
+      width: '400px'
+    });
+  }
+
+  openCreateDepartamentDialog():void{
+    this.dialog.open(DialogAddDepartamentComponent, {
+      height: '280px',
+      width: '400px'
+    });
+  }
+
+  openCreateSubdivisionDialog():void{
+    this.dialog.open(DialogAddSubdivisionComponent, {
+      height: '200px',
+      width: '400px'
     });
   }
 }

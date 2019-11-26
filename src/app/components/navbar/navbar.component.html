@@ -12,9 +12,9 @@
 
         <mat-menu #add="matMenu">
           <button *ngIf="isAdmin" mat-menu-item (click)="openCreateUserDialog()">Пользователя</button>
-          <button *ngIf="isAdmin||isDepartment||isDivision" mat-menu-item>Проект</button>
-          <button *ngIf="isAdmin||isDivision" mat-menu-item>Департамент</button>
-          <button *ngIf="isAdmin" mat-menu-item>Подразделение</button>
+          <button *ngIf="isAdmin||isDepartment||isDivision" (click)="openCreateProjectDialog()" mat-menu-item>Проект</button>
+          <button *ngIf="isAdmin||isDivision" mat-menu-item (click)="openCreateDepartamentDialog()">Департамент</button>
+          <button *ngIf="isAdmin" mat-menu-item (click)="openCreateSubdivisionDialog()">Подразделение</button>
           <button mat-menu-item (click)="openCreateTaskDialog()">Задачу</button>
         </mat-menu>
 

@@ -45,18 +45,21 @@ export class DialogAddUser implements OnInit {
     this.selectedDepartamentId = value;
   }
   roleChanged(value): void {
-    this.selectedRoleId=value;
+    this.selectedRoleId = value;
   }
   onNoClick(): void {
     this.dialogRef.close();
   }
   onYesClick(): void {
     if (this.name && this.lastname && this.middlename && this.selectedDepartamentId && this.selectedRoleId) {
-      this.user.firstName = this.name;
-      this.user.lastName = this.lastname;
-      this.user.middleName = this.middlename;
-      this.user.departmentId = this.selectedDepartamentId;
-      this.user.roleId=this.selectedRoleId;
+      this.user = {
+        firstName: this.name,
+        lastName: this.lastname,
+        middleName: this.middlename,
+        departmentId: this.selectedDepartamentId,
+        roleId: this.selectedRoleId,
+        id: null
+      };
       this.userService.updateUser(this.user);
       this.dialogRef.close();
     }
