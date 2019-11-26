@@ -23,4 +23,12 @@ export class ProjectsService {
   public getUserProjects(userId: number): Observable<ProjectDto[]> {
     return this.http.get<ProjectDto[]>(this.root + "/" + userId);
   }
+
+  public addProject(project: ProjectDto): Observable<any> {
+    return this.http.post(this.root, project);
+  }
+
+  public updateProject(project: ProjectDto): Observable<any> {
+    return this.http.put(this.root, project);
+  }
 }

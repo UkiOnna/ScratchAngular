@@ -1,0 +1,29 @@
+<div class="text-center">
+  <h4 mat-dialog-title>Добавление проекта</h4>
+  <div mat-dialog-content>
+    <mat-form-field class="example-full-width">
+      <input [(ngModel)]="name" matInput placeholder="Название" value="">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-label>Подразделение</mat-label>
+      <mat-select placeholder="Подразделение" (selectionChange)="subDivisionChanged($event.value)">
+        <mat-option *ngFor="let item of subDivisions" [value]="item.id">{{item.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-label>Департамент</mat-label>
+      <mat-select placeholder="Департамент" (selectionChange)="departamentChanged($event.value)">
+        <mat-option *ngFor="let item of departaments" [value]="item.id">{{item.title}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onYesClick()">Добавить</button>
+    <button mat-button (click)="onNoClick()">Отмена</button>
+  </div>
+  <div class="mt-2">
+    <mat-label *ngIf="isError">Не все поля правильно заполнены</mat-label>
+  </div>
+</div>
