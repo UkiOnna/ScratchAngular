@@ -3,5 +3,4 @@ export class IntervalDto {
   start: Date;
   end: Date;
   taskId: number;
-  userId: number;
 }

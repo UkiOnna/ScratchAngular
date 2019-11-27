@@ -5,5 +5,6 @@ export class TaskDto {
   comment: string;
   deadline: Date;
   creatorId: number;
+  executorId:number;
   projectId: number;
 }

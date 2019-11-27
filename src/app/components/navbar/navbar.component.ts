@@ -46,7 +46,7 @@ export class NavbarComponent implements OnInit {
   openCreateUserDialog(value): void {
     console.log(value);
     const dialogRef = this.dialog.open(DialogAddUser, {
-      height: '550px',
+      height: 'auto',
       width: '400px',
       data:{
         isEdit:value
@@ -56,7 +56,7 @@ export class NavbarComponent implements OnInit {
 
   openCreateTaskDialog(value): void {
     const dialogRef = this.dialog.open(DialogAddTaskComponent, {
-      height: '430px',
+      height: 'auto',
       width: '400px',
       data: {
         userId: this.userId,
@@ -67,7 +67,7 @@ export class NavbarComponent implements OnInit {
 
   openCreateProjectDialog(value): void {
     this.dialog.open(DialogAddProjectComponent, {
-      height: '330px',
+      height: 'auto',
       width: '400px',
       data:{
         isEdit:value
@@ -87,7 +87,7 @@ export class NavbarComponent implements OnInit {
 
   openCreateSubdivisionDialog(value): void {
     this.dialog.open(DialogAddSubdivisionComponent, {
-      height: '200px',
+      height: 'auto',
       width: '400px',
       data:{
         isEdit:value

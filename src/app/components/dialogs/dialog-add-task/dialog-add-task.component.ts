@@ -17,6 +17,7 @@ export class DialogAddTaskComponent implements OnInit {
   public description: string;
   public deadline = new FormControl(new Date());
   userId: number;
+  executorId:number;
   public projects: ProjectDto[] = [];
   selectedProjectId: number;
   task: TaskDto;
@@ -51,7 +52,8 @@ export class DialogAddTaskComponent implements OnInit {
         creatorId:this.userId,
         projectId:this.selectedProjectId,
         id:null,
-        comment:null
+        comment:null,
+        executorId:this.executorId
       };
       this.taskService.addTask(this.task);
       this.dialogRef.close();
