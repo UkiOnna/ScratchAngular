@@ -1,7 +1,9 @@
 <div class="text-center">
-  <h4 mat-dialog-title>Добавление департамента</h4>
+  <h4 mat-dialog-title *ngIf="isEdit; else elseBlock">Редактирование департамента</h4>
+  <ng-template #elseBlock><h4 mat-dialog-title>Добавление департамента</h4></ng-template>
+  
   <div mat-dialog-content>
-    <mat-form-field class="example-full-width">
+    <mat-form-field *ngIf="isDepartmentChoosed" class="example-full-width">
       <input [(ngModel)]="name" matInput placeholder="Название" value="">
     </mat-form-field>
     <br>
@@ -9,6 +11,13 @@
       <mat-label>Подразделение</mat-label>
       <mat-select placeholder="Подразделение" (selectionChange)="subDivisionChanged($event.value)">
         <mat-option *ngFor="let item of subDivisions" [value]="item.id">{{item.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-form-field *ngIf="isEdit">
+      <mat-label>Департамент</mat-label>
+      <mat-select placeholder="Подразделение" (selectionChange)="departamentChanged($event.value)">
+        <mat-option *ngFor="let item of departaments" [value]="item.id">{{item.name}}</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
