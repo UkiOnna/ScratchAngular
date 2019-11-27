@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { UserDto } from 'src/app/models/Dtos/user.model';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { DepartmentsService } from 'src/app/services/departments.service';
 import { SubdivisionsService } from 'src/app/services/subdivisions.service';
 import { UsersService } from 'src/app/services/users.service';
@@ -18,20 +18,35 @@ export class DialogAddUser implements OnInit {
   public departaments: DepartmentDto[] = [];
   public roles: RoleDto[] = [];
   public selectedDepartamentId: number;
+  public selectedDepartamentName: string;
   public selectedSubdivisionId: number;
+  public selectedSubdivisionName: string;
   public selectedRoleId: number;
+  public selectedRoleName: string;
+  public selectedUserId: number;
   public name: string;
   public middlename: string;
   public lastname: string;
   user: UserDto;
   isError: boolean = false;
+  isEdit: boolean = false;
+  isUserChoosed: boolean = true;
 
-  constructor(public dialogRef: MatDialogRef<DialogAddUser>, private departamentService: DepartmentsService, private subdivisionService: SubdivisionsService, private userService: UsersService) { }
+  constructor(public dialogRef: MatDialogRef<DialogAddUser>, @Inject(MAT_DIALOG_DATA) public data: any, private departamentService: DepartmentsService, private subdivisionService: SubdivisionsService, private userService: UsersService) { }
 
   ngOnInit() {
+    this.isEdit = this.data["isEdit"];
+    if (this.isEdit) {
+      this.isUserChoosed = false;
+    }
+
     this.subdivisionService.getSubdivisions().subscribe(subdivisions => {
       this.subDivisions = subdivisions;
     });
+    this.userService.getRoles().subscribe(recievedRoles => {
+      this.roles = recievedRoles;
+    });
+
   }
 
   subDivisionChanged(value): void {
@@ -46,6 +61,23 @@ export class DialogAddUser implements OnInit {
   }
   roleChanged(value): void {
     this.selectedRoleId = value;
+  }
+
+  userChanged(value): void {
+    this.userService.getUser(value).subscribe(recievedUser => {
+      this.departamentService.getDepartment(recievedUser.departmentId).subscribe(dep => {
+        this.selectedDepartamentName = dep.name;
+        this.selectedDepartamentId = dep.id;
+        this.subdivisionService.getSubdivison(dep.subdivisionId).subscribe(sub => {
+          this.selectedSubdivisionName = sub.name;
+          this.selectedSubdivisionId = sub.id;
+        });
+      });
+      this.name = recievedUser.firstName;
+      this.middlename = recievedUser.middleName;
+      this.lastname = recievedUser.lastName;
+      this.selectedUserId = recievedUser.id;
+    });
   }
   onNoClick(): void {
     this.dialogRef.close();
