@@ -43,41 +43,55 @@ export class NavbarComponent implements OnInit {
       this.isLogin = false;
     }
   }
-  openCreateUserDialog(): void {
+  openCreateUserDialog(value): void {
+    console.log(value);
     const dialogRef = this.dialog.open(DialogAddUser, {
       height: '550px',
-      width: '400px'
-    });
-  }
-
-  openCreateTaskDialog(): void {
-    const dialogRef = this.dialog.open(DialogAddTaskComponent, {
-      height: '430px',
       width: '400px',
-      data: {
-        userId: this.userId
+      data:{
+        isEdit:value
       }
     });
   }
 
-  openCreateProjectDialog(): void {
+  openCreateTaskDialog(value): void {
+    const dialogRef = this.dialog.open(DialogAddTaskComponent, {
+      height: '430px',
+      width: '400px',
+      data: {
+        userId: this.userId,
+        isEdit:value
+      }
+    });
+  }
+
+  openCreateProjectDialog(value): void {
     this.dialog.open(DialogAddProjectComponent, {
       height: '330px',
-      width: '400px'
+      width: '400px',
+      data:{
+        isEdit:value
+      }
     });
   }
 
-  openCreateDepartamentDialog():void{
+  openCreateDepartamentDialog(value): void {
     this.dialog.open(DialogAddDepartamentComponent, {
-      height: '280px',
-      width: '400px'
+      height: 'auto',
+      width: '400px',
+      data:{
+        isEdit:value
+      }
     });
   }
 
-  openCreateSubdivisionDialog():void{
+  openCreateSubdivisionDialog(value): void {
     this.dialog.open(DialogAddSubdivisionComponent, {
       height: '200px',
-      width: '400px'
+      width: '400px',
+      data:{
+        isEdit:value
+      }
     });
   }
 }

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { SubdivisionDto } from 'src/app/models/Dtos/subdivision.model';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { SubdivisionsService } from 'src/app/services/subdivisions.service';
 
 @Component({
@@ -11,12 +11,31 @@ import { SubdivisionsService } from 'src/app/services/subdivisions.service';
 export class DialogAddSubdivisionComponent implements OnInit {
 
   public name: string;
+  subdivisions: SubdivisionDto[] = [];
   subdivision: SubdivisionDto;
   isError: boolean = false;
+  isEdit: boolean = false;
+  isSubdivisionChoosed: boolean = true;
+  selectedSubdivisionId: number = null;
 
-  constructor(public dialogRef: MatDialogRef<DialogAddSubdivisionComponent>,private subdivisionService: SubdivisionsService) { }
+  constructor(public dialogRef: MatDialogRef<DialogAddSubdivisionComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private subdivisionService: SubdivisionsService) { }
 
   ngOnInit() {
+    this.isEdit = this.data["isEdit"];
+    if (this.isEdit) {
+      this.isSubdivisionChoosed = false;
+      this.subdivisionService.getSubdivisions().subscribe(subs => {
+        this.subdivisions = subs;
+      });
+    }
+  }
+
+  subDivisionChanged(value): void {
+    this.selectedSubdivisionId = value;
+    this.subdivisionService.getSubdivison(value).subscribe(subs => {
+      this.selectedSubdivisionId = subs.id;
+    });
+    this.isSubdivisionChoosed = true;
   }
 
   onNoClick(): void {
@@ -26,15 +45,18 @@ export class DialogAddSubdivisionComponent implements OnInit {
     if (this.name) {
       this.subdivision = {
         name: this.name,
-        id: null
+        id: this.selectedSubdivisionId
       };
+      if (this.selectedSubdivisionId) {
+        this.subdivisionService.updateSubdivision(this.subdivision);
+        this.dialogRef.close();
+        return;
+      }
       this.subdivisionService.addSubdivision(this.subdivision);
       this.dialogRef.close();
+      return;
     }
-    else {
-      this.isError = true;
-    }
-
+    this.isError = true;
   }
 
 }
