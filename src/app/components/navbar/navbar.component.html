@@ -36,7 +36,7 @@
 
       </mat-menu>
       <div *ngIf="isLogin; then thenBlock else elseBlock"></div>
-      <ng-template #thenBlock><button mat-button>Выход</button></ng-template>
-      <ng-template #elseBlock><button mat-button>Вход</button></ng-template>
+      <ng-template #thenBlock><button mat-button routerLink="/login">Выход</button></ng-template>
+      <ng-template #elseBlock><button mat-button routerLink="/login">Вход</button></ng-template>
     </div>
   </mat-toolbar-row>
