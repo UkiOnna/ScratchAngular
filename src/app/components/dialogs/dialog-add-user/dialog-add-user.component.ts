@@ -17,6 +17,7 @@ export class DialogAddUser implements OnInit {
   public subDivisions: SubdivisionDto[] = [];
   public departaments: DepartmentDto[] = [];
   public roles: RoleDto[] = [];
+  public users: UserDto[] = [];
   public selectedDepartamentId: number;
   public selectedDepartamentName: string;
   public selectedSubdivisionId: number;
@@ -45,6 +46,9 @@ export class DialogAddUser implements OnInit {
     });
     this.userService.getRoles().subscribe(recievedRoles => {
       this.roles = recievedRoles;
+    });
+    this.userService.getUsers().subscribe(users => {
+      this.users = users;
     });
 
   }
@@ -77,6 +81,7 @@ export class DialogAddUser implements OnInit {
       this.middlename = recievedUser.middleName;
       this.lastname = recievedUser.lastName;
       this.selectedUserId = recievedUser.id;
+      this.isUserChoosed = true;
     });
   }
   onNoClick(): void {

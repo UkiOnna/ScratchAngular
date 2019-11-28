@@ -2,6 +2,13 @@
   <h4 mat-dialog-title *ngIf="isEdit; else elseBlock">Редактирование пользователя</h4>
   <ng-template #elseBlock><h4 mat-dialog-title>Добавление пользователя</h4></ng-template>
   <div mat-dialog-content>
+      <mat-form-field *ngIf="isEdit">
+          <mat-label>Пользователь</mat-label>
+          <mat-select [(ngModel)]="selectedRoleName" placeholder="Пользователь" (selectionChange)="userChanged($event.value)">
+            <mat-option *ngFor="let item of users" [value]="item.id">{{item.firstName}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br>
     <mat-form-field *ngIf="isUserChoosed" class="example-full-width">
       <input [(ngModel)]="name" matInput placeholder="Имя" value="">
     </mat-form-field>
