@@ -55,4 +55,7 @@ export class UsersService {
   public getUsers(): Observable<UserDto[]> {
     return this.http.get<UserDto[]>(this.root);
   }
+  public addUser(user: UserDto): Observable<UserDto> {
+    return this.http.post<UserDto>(this.root + "/add", user);
+  }
 }

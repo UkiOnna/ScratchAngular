@@ -39,6 +39,9 @@ export class DialogAddUser implements OnInit {
     this.isEdit = this.data["isEdit"];
     if (this.isEdit) {
       this.isUserChoosed = false;
+      this.userService.getUsers().subscribe(users => {
+        this.users = users;
+      });
     }
 
     this.subdivisionService.getSubdivisions().subscribe(subdivisions => {
@@ -47,9 +50,7 @@ export class DialogAddUser implements OnInit {
     this.userService.getRoles().subscribe(recievedRoles => {
       this.roles = recievedRoles;
     });
-    this.userService.getUsers().subscribe(users => {
-      this.users = users;
-    });
+
 
   }
 
@@ -97,12 +98,19 @@ export class DialogAddUser implements OnInit {
         roleId: this.selectedRoleId,
         id: null
       };
+    
+    if (this.selectedUserId) {
       this.userService.updateUser(this.user);
       this.dialogRef.close();
+      return;
     }
-    else {
-      this.isError = true;
-    }
+    this.userService.addUser(this.user);
+    this.dialogRef.close();
+    return;
+  }
+
+    this.isError = true;
+
   }
 
 
