@@ -1,21 +1,29 @@
 <div class="text-center">
-  <h4 mat-dialog-title>Добавление проекта</h4>
+  <h4 mat-dialog-title *ngIf="isEdit; else elseBlock">Редактирование проекта</h4>
+  <ng-template #elseBlock><h4 mat-dialog-title>Добавление проекта</h4></ng-template>
   <div mat-dialog-content>
-    <mat-form-field class="example-full-width">
+      <mat-form-field *ngIf="isEdit">
+          <mat-label>Проекты</mat-label>
+          <mat-select placeholder="Проект" (selectionChange)="projectChanged($event.value)">
+            <mat-option *ngFor="let item of projects" [value]="item.id">{{item.title}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br>
+    <mat-form-field *ngIf="isProjectChoosed" class="example-full-width">
       <input [(ngModel)]="name" matInput placeholder="Название" value="">
     </mat-form-field>
     <br>
-    <mat-form-field>
+    <mat-form-field *ngIf="isProjectChoosed">
       <mat-label>Подразделение</mat-label>
-      <mat-select placeholder="Подразделение" (selectionChange)="subDivisionChanged($event.value)">
+      <mat-select [(ngModel)]="selectedSubdivisionName" placeholder="Подразделение" (selectionChange)="subDivisionChanged($event.value)">
         <mat-option *ngFor="let item of subDivisions" [value]="item.id">{{item.name}}</mat-option>
       </mat-select>
     </mat-form-field>
     <br>
-    <mat-form-field>
+    <mat-form-field *ngIf="isProjectChoosed">
       <mat-label>Департамент</mat-label>
-      <mat-select placeholder="Департамент" (selectionChange)="departamentChanged($event.value)">
-        <mat-option *ngFor="let item of departaments" [value]="item.id">{{item.title}}</mat-option>
+      <mat-select [(ngModel)]="selectedDepartamentName" placeholder="Департамент" (selectionChange)="departamentChanged($event.value)">
+        <mat-option *ngFor="let item of departaments" [value]="item.id">{{item.name}}</mat-option>
       </mat-select>
     </mat-form-field>
   </div>

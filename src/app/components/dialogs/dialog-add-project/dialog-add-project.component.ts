@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { DepartmentDto } from 'src/app/models/Dtos/department.model';
 import { ProjectDto } from 'src/app/models/Dtos/project.model';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { DepartmentsService } from 'src/app/services/departments.service';
 import { SubdivisionDto } from 'src/app/models/Dtos/subdivision.model';
 import { SubdivisionsService } from 'src/app/services/subdivisions.service';
@@ -17,13 +17,26 @@ export class DialogAddProjectComponent implements OnInit {
   public name: string;
   public departaments: DepartmentDto[] = [];
   public subDivisions: SubdivisionDto[] = [];
+  public projects: ProjectDto[] = [];
   selectedDepartamentId: number;
+  selectedDepartamentName: string;
+  selectedSubdivisionName: string;
+  selectedProjectId: number;
   project: ProjectDto;
   isError: boolean = false;
+  isEdit: boolean = false;
+  isProjectChoosed: boolean = true;
 
-  constructor(public dialogRef: MatDialogRef<DialogAddProjectComponent>, private departamentService: DepartmentsService, private projectService: ProjectsService, private subdivisionService: SubdivisionsService) { }
+  constructor(public dialogRef: MatDialogRef<DialogAddProjectComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private departamentService: DepartmentsService, private projectService: ProjectsService, private subdivisionService: SubdivisionsService) { }
 
   ngOnInit() {
+    this.isEdit = this.data["isEdit"];
+    if (this.isEdit) {
+      this.isProjectChoosed = false;
+      this.projectService.getProjects().subscribe(pj => {
+        this.projects = pj;
+      });
+    }
     this.subdivisionService.getSubdivisions().subscribe(subs => {
       this.subDivisions = subs;
     });
@@ -39,6 +52,18 @@ export class DialogAddProjectComponent implements OnInit {
     this.selectedDepartamentId = value;
   }
 
+  projectChanged(value): void {
+    this.projectService.getProject(value).subscribe(pj => {
+      this.selectedDepartamentId = pj.departmentId;
+      this.departamentService.getDepartment(pj.departmentId).subscribe(dp => {
+        this.selectedDepartamentName = dp.name;
+      });
+      this.selectedProjectId = pj.id;
+      this.name = pj.title;
+    });
+    this.isProjectChoosed = true;
+  }
+
   onNoClick(): void {
     this.dialogRef.close();
   }
@@ -49,12 +74,16 @@ export class DialogAddProjectComponent implements OnInit {
         departmentId: this.selectedDepartamentId,
         id: null
       };
+      if (this.selectedProjectId) {
+        this.projectService.updateProject(this.project);
+        this.dialogRef.close();
+        return;
+      }
       this.projectService.addProject(this.project);
       this.dialogRef.close();
+      return;
     }
-    else {
-      this.isError = true;
-    }
+    this.isError = true;
   }
 
 }
