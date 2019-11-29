@@ -5,6 +5,8 @@ import { ProjectDto } from 'src/app/models/Dtos/project.model';
 import { TaskDto } from 'src/app/models/Dtos/task.model';
 import { TasksService } from 'src/app/services/tasks.service';
 import { FormControl } from '@angular/forms';
+import { UserDto } from 'src/app/models/Dtos/user.model';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-dialog-add-task',
@@ -17,15 +19,32 @@ export class DialogAddTaskComponent implements OnInit {
   public description: string;
   public deadline = new FormControl(new Date());
   userId: number;
-  executorId:number;
+  selecetedExecutorId: number;
   public projects: ProjectDto[] = [];
+  public tasks: TaskDto[] = [];
+  public executors: UserDto[] = [];
+  selecetdProjectName: string;
+  selectedExecutorName: string;
   selectedProjectId: number;
+  selectedTaskId: number;
   task: TaskDto;
   isError: boolean = false;
-  constructor(public dialogRef: MatDialogRef<DialogAddTaskComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private projectService: ProjectsService, private taskService: TasksService) { }
+  isEdit: boolean = false;
+  isTaskChoosed: boolean = true;
+  constructor(public dialogRef: MatDialogRef<DialogAddTaskComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private projectService: ProjectsService, private taskService: TasksService, private userSevice: UsersService) { }
 
   ngOnInit() {
     this.userId = this.data["userId"];
+    this.isEdit = this.data["isEdit"];
+    if (this.isEdit) {
+      this.isTaskChoosed = false;
+      this.taskService.getUserTasks(this.userId, null).subscribe(ts => {
+        this.tasks = ts;
+      });
+    }
+    this.userSevice.getUsers().subscribe(u => {
+      this.executors = u;
+    });
     this.projectService.getProjects().subscribe(projects => {
       this.projects = projects;
     });
@@ -35,31 +54,58 @@ export class DialogAddTaskComponent implements OnInit {
     this.selectedProjectId = value;
   }
 
-  updateDate(value): void{
+  taskChaged(value): void {
+    this.taskService.getTask(value).subscribe(task => {
+      this.name = task.title;
+      this.deadline.setValue(task.deadline);
+      this.description = task.description;
+      this.selecetedExecutorId = task.executorId;
+      this.selectedProjectId = task.projectId;
+    });
+    this.projectService.getProject(this.selectedProjectId).subscribe(proj => {
+      this.selecetdProjectName = proj.title;
+    });
+    this.userSevice.getUser(this.selecetedExecutorId).subscribe(user => {
+      this.selectedExecutorName = user.firstName;
+    });
+    this.selectedTaskId = value;
+    this.isTaskChoosed = true;
+  }
+
+  updateDate(value): void {
     let newDate = new Date(value);
     this.deadline.setValue(newDate);
+  }
+
+  executorChanged(value): void {
+    this.selecetedExecutorId = value;
   }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
   onYesClick(): void {
-    if (!!this.name && this.deadline && this.description && this.selectedProjectId) {
-      this.task={
+    if (!!this.name && this.deadline && this.description && this.selectedProjectId && this.selecetedExecutorId) {
+      this.task = {
         description: this.description,
         deadline: this.deadline.value,
-        title:this.name,
-        creatorId:this.userId,
-        projectId:this.selectedProjectId,
-        id:null,
-        comment:null,
-        executorId:this.executorId
+        title: this.name,
+        creatorId: this.userId,
+        projectId: this.selectedProjectId,
+        id: null,
+        comment: null,
+        executorId: this.selecetedExecutorId
       };
+      if (this.selectedTaskId) {
+        this.taskService.updateTask(this.task);
+        this.dialogRef.close();
+        return;
+      }
       this.taskService.addTask(this.task);
       this.dialogRef.close();
+      return;
     }
-    else {
-      this.isError = true;
-    }
+    this.isError = true;
+
   }
 }

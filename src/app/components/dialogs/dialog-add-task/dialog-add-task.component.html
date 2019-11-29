@@ -1,23 +1,38 @@
 <div class="text-center">
-  <h4 mat-dialog-title>Добавление задачи</h4>
-  <div mat-dialog-content>
-    <mat-form-field class="example-full-width">
+  <h4 mat-dialog-title *ngIf="isEdit; else elseBlock">Редактирование задачи</h4>
+  <ng-template #elseBlock><h4 mat-dialog-title>Добавление задачи</h4></ng-template>
+  <div mat-dialog-content> 
+      <mat-form-field *ngIf="isEdit">
+          <mat-label>Задача</mat-label>
+          <mat-select placeholder="Задача" (selectionChange)="userChanged($event.value)">
+            <mat-option *ngFor="let item of users" [value]="item.id">{{item.firstName}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br>
+    <mat-form-field class="example-full-width" *ngIf="isTaskChoosed">
       <input [(ngModel)]="name" matInput placeholder="Название" value="">
     </mat-form-field>
     <br>
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="example-full-width" *ngIf="isTaskChoosed">
       <textarea [(ngModel)]="description" matInput placeholder="Описание"></textarea>
     </mat-form-field>
     <br>
-    <mat-form-field class="example-full-width">
-      <input  matInput [matDatepicker]="deadline" [value]="deadline.value" placeholder="Дедлайн" (dateChange)="updateDate($event.value)">
+    <mat-form-field class="example-full-width" *ngIf="isTaskChoosed">
+      <input  matInput [matDatepicker]="deadline" [value]="deadline" placeholder="Дедлайн" (dateChange)="updateDate($event.value)">
       <mat-datepicker-toggle matSuffix [for]="deadline"></mat-datepicker-toggle>
       <mat-datepicker #deadline></mat-datepicker>
     </mat-form-field>
     <br>
-    <mat-form-field>
+    <mat-form-field *ngIf="isTaskChoosed">
+      <mat-label>Исполнитель</mat-label>
+      <mat-select [(ngModel)]="selectedExecutorName" placeholder="Исполнитель" (selectionChange)="executorChanged($event.value)">
+        <mat-option *ngFor="let item of executors" [value]="item.id">{{item.firstname}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-form-field *ngIf="isTaskChoosed">
       <mat-label>Проект</mat-label>
-      <mat-select placeholder="Проект" (selectionChange)="projectChanged($event.value)">
+      <mat-select [(ngModel)]="selecetdProjectName" placeholder="Проект" (selectionChange)="projectChanged($event.value)">
         <mat-option *ngFor="let item of projects" [value]="item.id">{{item.title}}</mat-option>
       </mat-select>
     </mat-form-field>

@@ -4,7 +4,7 @@
   <div mat-dialog-content>
       <mat-form-field *ngIf="isEdit">
           <mat-label>Пользователь</mat-label>
-          <mat-select [(ngModel)]="selectedRoleName" placeholder="Пользователь" (selectionChange)="userChanged($event.value)">
+          <mat-select placeholder="Пользователь" (selectionChange)="userChanged($event.value)">
             <mat-option *ngFor="let item of users" [value]="item.id">{{item.firstName}}</mat-option>
           </mat-select>
         </mat-form-field>
