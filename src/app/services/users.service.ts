@@ -9,7 +9,7 @@ import { RoleDto } from '../models/Dtos/role.model';
 })
 export class UsersService {
 
-  private root = "/api/users"
+  private root = "./api/users"
   constructor(private http: HttpClient) { }
 
   public signIn(user: UserLoginDto): Observable<string> {
