@@ -100,7 +100,6 @@ export class DialogAddTaskComponent implements OnInit {
         creatorId: this.userId,
         projectId: this.selectedProjectId,
         id: null,
-        comment: null,
         executorId: this.selecetedExecutorId
       };
       if (this.selectedTaskId) {
