@@ -7,6 +7,7 @@ import { ProjectsService } from 'src/app/services/projects.service';
 import { TaskViewModel } from 'src/app/models/Views/taskView.model';
 import { IntervalCellViewModel } from 'src/app/models/Views/intervalCellView.model';
 import { MatTableDataSource } from '@angular/material';
+import { FileService } from 'src/app/services/files.service';
 
 @Component({
   selector: 'app-main-page',
@@ -25,7 +26,7 @@ export class MainPageComponent implements OnInit {
 
   constructor(private tasksService: TasksService,
     private intervalsService: IntervalsService,
-    private projectsService: ProjectsService) { }
+    private projectsService: ProjectsService,private fileService:FileService) { }
 
   ngOnInit() {
     for (let i = 7; i <= 22; i++) {
@@ -66,6 +67,10 @@ export class MainPageComponent implements OnInit {
   applyFilter(filterValue: string) {
     this.tasks.filter = filterValue.trim().toLowerCase();
   }
+
+  exportAsXLSX():void {
+    this.fileService.exportAsExcelFile(this.tasks.data, 'sample');
+ }
 
   private dateIsInRange(requiredHour, startDate, endDate): boolean {
     let date = this.taskDate.value;
