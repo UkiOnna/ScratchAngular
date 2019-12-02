@@ -11,8 +11,9 @@
             <button routerLink="/personal-statistic" class="person-statistic-btn" mat-raised-button color="primary">Персональная статистика</button>
           </div>
           <div class="right d-inline">
-            <mat-form-field class="date-form-field">
-              <input matInput [matDatepicker]="taskDate" placeholder="Дата" [value]="taskDate.value">
+            <mat-form-field class="date-form-field ml-1">
+              <input matInput [matDatepicker]="taskDate" [value]="taskDate.value" placeholder="Дата"
+                (dateChange)="updateTaskDate($event.value)">
               <mat-datepicker-toggle matSuffix [for]="taskDate"></mat-datepicker-toggle>
               <mat-datepicker #taskDate></mat-datepicker>
             </mat-form-field>

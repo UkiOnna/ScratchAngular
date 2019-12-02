@@ -6,6 +6,7 @@ import { IntervalsService } from 'src/app/services/intervals.service';
 import { ProjectsService } from 'src/app/services/projects.service';
 import { TaskViewModel } from 'src/app/models/Views/taskView.model';
 import { IntervalCellViewModel } from 'src/app/models/Views/intervalCellView.model';
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-main-page',
@@ -20,7 +21,7 @@ export class MainPageComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'projectName', 'taskName'];
   hoursColumns: string[] = [];
-  tasks: TaskViewModel[] = [];
+  tasks = new MatTableDataSource([]);
 
   constructor(private tasksService: TasksService,
     private intervalsService: IntervalsService,
@@ -55,11 +56,15 @@ export class MainPageComponent implements OnInit {
               taskName: t.title,
               intervalCells: intervalCells
             };
-            this.tasks.push(element);
+            this.tasks.data.push(element);
           });
         });
       });
     });
+  }
+
+  applyFilter(filterValue: string) {
+    this.tasks.filter = filterValue.trim().toLowerCase();
   }
 
   private dateIsInRange(requiredHour, startDate, endDate): boolean {
@@ -70,5 +75,10 @@ export class MainPageComponent implements OnInit {
 
   public getNumber(str: string): number {
     return Number.parseInt(str);
+  }
+
+  updateTaskDate(value): void {
+    let newDate = new Date(value);
+    this.taskDate.setValue(newDate);
   }
 }

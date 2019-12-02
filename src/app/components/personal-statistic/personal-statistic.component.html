@@ -9,13 +9,15 @@
           <div class="left d-inline-block">
             <span>С</span>
             <mat-form-field class="date-form-field ml-1">
-              <input matInput [matDatepicker]="startDate" placeholder="Дата" [value]="startDate.value">
+              <input matInput [matDatepicker]="startDate" [value]="startDate.value" placeholder="Дата"
+                (dateChange)="updateStartDate($event.value)">
               <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
               <mat-datepicker #startDate></mat-datepicker>
             </mat-form-field>
             <span class="ml-3">По</span>
             <mat-form-field class="date-form-field ml-1">
-              <input matInput [matDatepicker]="endDate" placeholder="Дата" [value]="endDate.value">
+              <input matInput [matDatepicker]="endDate" [value]="endDate.value" placeholder="Дата"
+                (dateChange)="updateEndDate($event.value)">
               <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
               <mat-datepicker #endDate></mat-datepicker>
             </mat-form-field>
@@ -59,7 +61,7 @@
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Статус задачи </th>
               <td mat-cell *matCellDef="let row"> {{row.taskStatus}} </td>
             </ng-container>
-            
+
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
