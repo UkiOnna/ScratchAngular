@@ -32,12 +32,14 @@ export class DialogAddUser implements OnInit {
   isError: boolean = false;
   isEdit: boolean = false;
   isUserChoosed: boolean = true;
+  isDeleted: boolean = false;
 
   constructor(public dialogRef: MatDialogRef<DialogAddUser>, @Inject(MAT_DIALOG_DATA) public data: any, private departamentService: DepartmentsService, private subdivisionService: SubdivisionsService, private userService: UsersService) { }
 
   ngOnInit() {
     this.isEdit = this.data["isEdit"];
-    if (this.isEdit) {
+    this.isDeleted = this.data["isDeleted"];
+    if (this.isEdit || this.isDeleted) {
       this.isUserChoosed = false;
       this.userService.getUsers().subscribe(users => {
         this.users = users;
@@ -89,6 +91,12 @@ export class DialogAddUser implements OnInit {
     this.dialogRef.close();
   }
   onYesClick(): void {
+
+    if (this.selectedUserId && this.isDeleted) {
+      this.userService.deleteUser(this.selectedUserId);
+      this.dialogRef.close();
+      return;
+    }
     if (this.name && this.lastname && this.middlename && this.selectedDepartamentId && this.selectedRoleId) {
       this.user = {
         firstName: this.name,
@@ -98,16 +106,16 @@ export class DialogAddUser implements OnInit {
         roleId: this.selectedRoleId,
         id: null
       };
-    
-    if (this.selectedUserId) {
-      this.userService.updateUser(this.user);
+
+      if (this.selectedUserId && this.isEdit) {
+        this.userService.updateUser(this.user);
+        this.dialogRef.close();
+        return;
+      }
+      this.userService.addUser(this.user);
       this.dialogRef.close();
       return;
     }
-    this.userService.addUser(this.user);
-    this.dialogRef.close();
-    return;
-  }
 
     this.isError = true;
 

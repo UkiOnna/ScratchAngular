@@ -58,4 +58,7 @@ export class UsersService {
   public addUser(user: UserDto): Observable<UserDto> {
     return this.http.post<UserDto>(this.root + "/add", user);
   }
+  public deleteUser(userId: number): Observable<any> {
+    return this.http.delete(this.root + "/" + userId);
+  }
 }

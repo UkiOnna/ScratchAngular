@@ -11,27 +11,27 @@
         <button *ngIf="isAdmin" mat-menu-item [matMenuTriggerFor]="delete">Удалить</button>
 
         <mat-menu #add="matMenu">
-          <button *ngIf="isAdmin" mat-menu-item (click)="openCreateUserDialog(false)">Пользователя</button>
-          <button *ngIf="isAdmin||isDepartment||isDivision" (click)="openCreateProjectDialog(false)" mat-menu-item>Проект</button>
-          <button *ngIf="isAdmin||isDivision" mat-menu-item (click)="openCreateDepartamentDialog(false)">Департамент</button>
-          <button *ngIf="isAdmin" mat-menu-item (click)="openCreateSubdivisionDialog(false)">Подразделение</button>
-          <button mat-menu-item (click)="openCreateTaskDialog(false)">Задачу</button>
+          <button *ngIf="isAdmin" mat-menu-item (click)="openCreateUserDialog(false,false)">Пользователя</button>
+          <button *ngIf="isAdmin||isDepartment||isDivision" (click)="openCreateProjectDialog(false,false)" mat-menu-item>Проект</button>
+          <button *ngIf="isAdmin||isDivision" mat-menu-item (click)="openCreateDepartamentDialog(false,false)">Департамент</button>
+          <button *ngIf="isAdmin" mat-menu-item (click)="openCreateSubdivisionDialog(false,false)">Подразделение</button>
+          <button mat-menu-item (click)="openCreateTaskDialog(false,false)">Задачу</button>
         </mat-menu>
 
         <mat-menu #edit="matMenu">
-          <button *ngIf="isAdmin" (click)="openCreateUserDialog(true)" mat-menu-item>Пользователя</button>
-          <button *ngIf="isAdmin||isDepartment||isDivision" (click)="openCreateProjectDialog(true)" mat-menu-item>Проект</button>
-          <button *ngIf="isAdmin||isDivision" (click)="openCreateDepartamentDialog(true)" mat-menu-item>Департамент</button>
-          <button *ngIf="isAdmin" (click)="openCreateSubdivisionDialog(true)" mat-menu-item>Подразделение</button>
-          <button mat-menu-item (click)="openCreateTaskDialog(true)">Задачу</button>
+          <button *ngIf="isAdmin" (click)="openCreateUserDialog(true,false)" mat-menu-item>Пользователя</button>
+          <button *ngIf="isAdmin||isDepartment||isDivision" (click)="openCreateProjectDialog(true,false)" mat-menu-item>Проект</button>
+          <button *ngIf="isAdmin||isDivision" (click)="openCreateDepartamentDialog(true,false)" mat-menu-item>Департамент</button>
+          <button *ngIf="isAdmin" (click)="openCreateSubdivisionDialog(true,false)" mat-menu-item>Подразделение</button>
+          <button mat-menu-item (click)="openCreateTaskDialog(true,false)">Задачу</button>
         </mat-menu>
 
         <mat-menu #delete="matMenu">
-          <button *ngIf="isAdmin" mat-menu-item>Пользователя</button>
-          <button *ngIf="isAdmin||isDepartment||isDivision" mat-menu-item>Проект</button>
-          <button *ngIf="isAdmin||isDivision" mat-menu-item>Департамент</button>
-          <button *ngIf="isAdmin" mat-menu-item>Подразделение</button>
-          <button mat-menu-item>Задачу</button>
+          <button *ngIf="isAdmin" mat-menu-item (click)="openCreateUserDialog(false,true)">Пользователя</button>
+          <button *ngIf="isAdmin||isDepartment||isDivision" (click)="openCreateProjectDialog(false,true)" mat-menu-item>Проект</button>
+          <button *ngIf="isAdmin||isDivision" mat-menu-item (click)="openCreateDepartamentDialog(false,true)">Департамент</button>
+          <button *ngIf="isAdmin" mat-menu-item (click)="openCreateSubdivisionDialog(false,true)">Подразделение</button>
+          <button mat-menu-item (click)="openCreateTaskDialog(false,true)">Задачу</button>
         </mat-menu>
 
       </mat-menu>

@@ -43,13 +43,14 @@ export class NavbarComponent implements OnInit {
       this.isLogin = false;
     }
   }
-  openCreateUserDialog(value): void {
+  openCreateUserDialog(value,isDeleted): void {
     console.log(value);
     const dialogRef = this.dialog.open(DialogAddUser, {
       height: 'auto',
       width: '400px',
       data:{
-        isEdit:value
+        isEdit:value,
+        isDeleted:isDeleted
       }
     });
   }
