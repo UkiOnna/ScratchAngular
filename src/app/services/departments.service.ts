@@ -26,4 +26,7 @@ export class DepartmentsService {
   public updateDepartment(department: DepartmentDto): Observable<any> {
     return this.http.put(this.root + "/" + department.id, department);
   }
+  public deleteDepartament(departamentId: number): Observable<any> {
+    return this.http.delete(this.root + "/" + departamentId);
+  }
 }

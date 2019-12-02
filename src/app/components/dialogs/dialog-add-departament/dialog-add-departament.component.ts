@@ -21,12 +21,14 @@ export class DialogAddDepartamentComponent implements OnInit {
   isError: boolean = false;
   isEdit: boolean = false;
   isDepartmentChoosed: boolean = true;
+  isDeleted: boolean = false;
 
   constructor(public dialogRef: MatDialogRef<DialogAddDepartamentComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private departamentService: DepartmentsService, private subdivisionService: SubdivisionsService) { }
 
   ngOnInit() {
+    this.isDeleted = this.data["isDeleted"];
     this.isEdit = this.data["isEdit"];
-    if (this.isEdit) {
+    if (this.isEdit || this.isDeleted) {
       this.isDepartmentChoosed = false;
     }
     this.subdivisionService.getSubdivisions().subscribe(subs => {
@@ -55,6 +57,11 @@ export class DialogAddDepartamentComponent implements OnInit {
     this.dialogRef.close();
   }
   onYesClick(): void {
+    if (this.selectedDepartamentId && this.isDeleted) {
+      this.departamentService.deleteDepartament(this.selectedDepartamentId);
+      this.dialogRef.close();
+      return;
+    }
     if (this.name && this.selectedSubdivisionId) {
       this.departament = {
         name: this.name,
