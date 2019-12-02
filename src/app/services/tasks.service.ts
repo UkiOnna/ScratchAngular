@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { TaskDto } from '../models/Dtos/task.model';
 import { TaskPersonStatisticDto } from '../models/Dtos/taskPersonStatistic.model';
+import { UserWorkOnTheTaskDto } from '../models/Dtos/userWorkOnTheTask.model';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +37,11 @@ export class TasksService {
     return this.http.get<TaskPersonStatisticDto[]>(this.root + "/personal-statistics/" + userId + "/" + startDate + "/" + endDate);
   }
 
-  public getProjectUserWorkOnTheTasks(projectId: number, startDate: Date, endDate: Date) {
-    return this.http.get<TaskPersonStatisticDto[]>(this.root + "/project/" + projectId + "/" + startDate + "/" + endDate);
+  public getProjectUserWorkOnTheTasks(projectId: number, startDate: Date, endDate: Date): Observable<UserWorkOnTheTaskDto[]> {
+    return this.http.get<UserWorkOnTheTaskDto[]>(this.root + "/project/" + projectId + "/" + startDate + "/" + endDate);
+  }
+
+  public getProjectTasks(projectId: number): Observable<TaskDto[]> {
+    return this.http.get<TaskDto[]>(this.root + "/project/" + projectId);
   }
 }
