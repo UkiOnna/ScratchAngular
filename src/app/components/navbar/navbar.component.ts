@@ -55,43 +55,47 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  openCreateTaskDialog(value): void {
+  openCreateTaskDialog(value,isDeleted): void {
     const dialogRef = this.dialog.open(DialogAddTaskComponent, {
       height: 'auto',
       width: '400px',
       data: {
         userId: this.userId,
-        isEdit:value
+        isEdit:value,
+        isDeleted:isDeleted
       }
     });
   }
 
-  openCreateProjectDialog(value): void {
+  openCreateProjectDialog(value,isDeleted): void {
     this.dialog.open(DialogAddProjectComponent, {
       height: 'auto',
       width: '400px',
       data:{
-        isEdit:value
+        isEdit:value,
+        isDeleted:isDeleted
       }
     });
   }
 
-  openCreateDepartamentDialog(value): void {
+  openCreateDepartamentDialog(value,isDeleted): void {
     this.dialog.open(DialogAddDepartamentComponent, {
       height: 'auto',
       width: '400px',
       data:{
-        isEdit:value
+        isEdit:value,
+        isDeleted:isDeleted
       }
     });
   }
 
-  openCreateSubdivisionDialog(value): void {
+  openCreateSubdivisionDialog(value,isDeleted): void {
     this.dialog.open(DialogAddSubdivisionComponent, {
       height: 'auto',
       width: '400px',
       data:{
-        isEdit:value
+        isEdit:value,
+        isDeleted:isDeleted
       }
     });
   }

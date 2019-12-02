@@ -1,20 +1,21 @@
 <div class="text-center">
   <h4 mat-dialog-title *ngIf="isEdit; else elseBlock">Редактирование подразделения</h4>
-  <ng-template #elseBlock><h4 mat-dialog-title>Добавление подразделения</h4></ng-template>
+  <ng-template #elseBlock><h4 mat-dialog-title *ngIf="!isDeleted; else thenBlock">Добавление подразделения</h4></ng-template>
+  <ng-template #thenBlock><h4 mat-dialog-title>Удаление подразделения</h4></ng-template>
     <div mat-dialog-content>
-        <mat-form-field>
+        <mat-form-field *ngIf="isEdit || isDeleted">
             <mat-label>Подразделение</mat-label>
             <mat-select placeholder="Подразделение" (selectionChange)="subDivisionChanged($event.value)">
               <mat-option *ngFor="let item of subdivisions" [value]="item.id">{{item.name}}</mat-option>
             </mat-select>
           </mat-form-field>
           <br>
-      <mat-form-field *ngIf="isSubdivisionChoosed" class="example-full-width">
+      <mat-form-field *ngIf="isSubdivisionChoosed && !isDeleted" class="example-full-width">
         <input [(ngModel)]="name" matInput placeholder="Название" value="">
       </mat-form-field>
     </div>
     <div mat-dialog-actions>
-      <button mat-button (click)="onYesClick()">Добавить</button>
+      <button mat-button (click)="onYesClick()">Ok</button>
       <button mat-button (click)="onNoClick()">Отмена</button>
     </div>
     <div class="mt-2">
