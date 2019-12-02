@@ -5,7 +5,7 @@
   <div mat-dialog-content> 
       <mat-form-field *ngIf="isEdit || isDeleted">
           <mat-label>Задача</mat-label>
-          <mat-select placeholder="Задача" (selectionChange)="userChanged($event.value)">
+          <mat-select placeholder="Задача" (selectionChange)="taskChaged($event.value)">
             <mat-option *ngFor="let item of users" [value]="item.id">{{item.firstName}}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -27,7 +27,7 @@
     <mat-form-field *ngIf="isTaskChoosed && !isDeleted">
       <mat-label>Исполнитель</mat-label>
       <mat-select [(ngModel)]="selectedExecutorName" placeholder="Исполнитель" (selectionChange)="executorChanged($event.value)">
-        <mat-option *ngFor="let item of executors" [value]="item.id">{{item.firstname}}</mat-option>
+        <mat-option *ngFor="let item of executors" [value]="item.id">{{item.firstName}}</mat-option>
       </mat-select>
     </mat-form-field>
     <br>

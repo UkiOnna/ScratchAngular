@@ -17,8 +17,10 @@ export class PersonalStatisticComponent implements OnInit {
 
   user: UserDto;
   tasks: TaskPersonStatisticDto[] = [];
+  
   startDate = new FormControl(new Date());
   endDate = new FormControl(new Date());
+  searchValue = '';
 
   constructor(private tasksService: TasksService,
     private intervalsService: IntervalsService,
