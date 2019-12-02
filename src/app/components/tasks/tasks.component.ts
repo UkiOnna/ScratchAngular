@@ -2,6 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { UserWorkOnTheTaskDto } from 'src/app/models/Dtos/userWorkOnTheTask.model';
 import { UserWorkOnTheTaskViewModel } from 'src/app/models/Views/userWorkOnTheTaskView.model';
+import { ProjectDto } from 'src/app/models/Dtos/project.model';
+import { MatTableDataSource } from '@angular/material';
+import { TasksService } from 'src/app/services/tasks.service';
+import { TaskFullViewModel } from 'src/app/models/Views/taskFullView.model';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-tasks',
@@ -10,17 +15,36 @@ import { UserWorkOnTheTaskViewModel } from 'src/app/models/Views/userWorkOnTheTa
 })
 export class TasksComponent implements OnInit {
 
-  projectName: string = "Задачи проекта";
-  displayedColumns: string[] = ['id', 'creatorName', 'taskName', 'deadline', 'todayWorkTime', 'allWorkTime', 'taskStatus'];
+  @Input() project: ProjectDto;
 
-  @Input() tasks: UserWorkOnTheTaskDto[] = [];
+  displayedColumns: string[] = ['id', 'name'];
+  tasks = new MatTableDataSource([]);
+  searchValue = '';
 
-  tasksViews: UserWorkOnTheTaskViewModel[] = [];
-  startDate = new FormControl(new Date());
-  endDate = new FormControl(new Date());
-
-  constructor() { }
+  constructor(private tasksService: TasksService,
+    private usersService: UsersService) { }
 
   ngOnInit() {
+    this.tasksService.getProjectTasks(this.project.id).subscribe(result => {
+      this.tasks.data = [];
+      result.forEach(r => {
+        this.usersService.getUser(r.creatorId).subscribe(cu => {
+          this.usersService.getUser(r.executorId).subscribe(eu => {
+            let task: TaskFullViewModel = {
+              id: r.id,
+              title: r.title,
+              deadline: r.deadline,
+              creatorName: cu.lastName + cu.firstName,
+              executorName: eu.lastName + eu.firstName
+            };
+            this.tasks.data.push(task);
+          });
+        });
+      });
+    });
+  }
+
+  applyFilter(filterValue: string) {
+    this.tasks.filter = filterValue.trim().toLowerCase();
   }
 }
