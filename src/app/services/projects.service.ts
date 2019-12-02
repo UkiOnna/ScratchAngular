@@ -31,4 +31,7 @@ export class ProjectsService {
   public updateProject(project: ProjectDto): Observable<any> {
     return this.http.put(this.root, project);
   }
+  public deleteProject(projectId: number): Observable<any> {
+    return this.http.delete(this.root + "/" + projectId);
+  }
 }

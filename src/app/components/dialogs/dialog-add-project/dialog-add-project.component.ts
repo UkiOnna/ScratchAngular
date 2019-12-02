@@ -26,12 +26,14 @@ export class DialogAddProjectComponent implements OnInit {
   isError: boolean = false;
   isEdit: boolean = false;
   isProjectChoosed: boolean = true;
+  isDeleted: boolean = false;
 
   constructor(public dialogRef: MatDialogRef<DialogAddProjectComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private departamentService: DepartmentsService, private projectService: ProjectsService, private subdivisionService: SubdivisionsService) { }
 
   ngOnInit() {
     this.isEdit = this.data["isEdit"];
-    if (this.isEdit) {
+    this.isDeleted = this.data["isDeleted"];
+    if (this.isEdit || this.isDeleted) {
       this.isProjectChoosed = false;
       this.projectService.getProjects().subscribe(pj => {
         this.projects = pj;
@@ -68,6 +70,11 @@ export class DialogAddProjectComponent implements OnInit {
     this.dialogRef.close();
   }
   onYesClick(): void {
+    if (this.selectedProjectId && this.isDeleted) {
+      this.projectService.deleteProject(this.selectedProjectId);
+      this.dialogRef.close();
+      return;
+    }
     if (this.name && this.selectedDepartamentId) {
       this.project = {
         title: this.name,
