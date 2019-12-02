@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ProjectsService {
 
-  private  root = "/api/intervals"
+  private  root = "/api/projects"
   
   constructor(private http: HttpClient) { }
 
@@ -18,6 +18,10 @@ export class ProjectsService {
 
   public getProjects(): Observable<ProjectDto[]> {
     return this.http.get<ProjectDto[]>(this.root);
+  }
+
+  public getDepartmentProjects(departmentId: number): Observable<ProjectDto[]> {
+    return this.http.get<ProjectDto[]>(this.root + "/department/" + departmentId);
   }
 
   public getUserProjects(userId: number): Observable<ProjectDto[]> {
