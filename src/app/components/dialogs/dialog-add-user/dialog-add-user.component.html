@@ -10,15 +10,15 @@
           </mat-select>
         </mat-form-field>
         <br>
-    <mat-form-field *ngIf="isUserChoosed && !isDeleted" class="example-full-width">
+    <mat-form-field *ngIf="isUserChoosed && !isDeleted">
       <input [(ngModel)]="name" matInput placeholder="Имя" value="">
     </mat-form-field>
     <br>
-    <mat-form-field *ngIf="isUserChoosed && !isDeleted" class="example-full-width">
+    <mat-form-field *ngIf="isUserChoosed && !isDeleted">
       <input [(ngModel)]="lastname" matInput placeholder="Фамилия">
     </mat-form-field>
     <br>
-    <mat-form-field *ngIf="isUserChoosed && !isDeleted" class="example-full-width">
+    <mat-form-field *ngIf="isUserChoosed && !isDeleted">
       <input [(ngModel)]="middlename" matInput placeholder="Отчество">
     </mat-form-field>
     <br>

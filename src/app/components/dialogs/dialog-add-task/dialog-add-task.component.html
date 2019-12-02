@@ -6,19 +6,19 @@
       <mat-form-field *ngIf="isEdit || isDeleted">
           <mat-label>Задача</mat-label>
           <mat-select placeholder="Задача" (selectionChange)="taskChaged($event.value)">
-            <mat-option *ngFor="let item of users" [value]="item.id">{{item.firstName}}</mat-option>
+            <mat-option *ngFor="let item of tasks" [value]="item.id">{{item.title}}</mat-option>
           </mat-select>
         </mat-form-field>
         <br>
-    <mat-form-field class="example-full-width" *ngIf="isTaskChoosed && !isDeleted">
+    <mat-form-field *ngIf="isTaskChoosed && !isDeleted">
       <input [(ngModel)]="name" matInput placeholder="Название" value="">
     </mat-form-field>
     <br>
-    <mat-form-field class="example-full-width" *ngIf="isTaskChoosed && !isDeleted">
+    <mat-form-field *ngIf="isTaskChoosed && !isDeleted">
       <textarea [(ngModel)]="description" matInput placeholder="Описание"></textarea>
     </mat-form-field>
     <br>
-    <mat-form-field class="example-full-width" *ngIf="isTaskChoosed && !isDeleted">
+    <mat-form-field *ngIf="isTaskChoosed && !isDeleted">
       <input  matInput [matDatepicker]="deadline" [value]="deadline" placeholder="Дедлайн" (dateChange)="updateDate($event.value)">
       <mat-datepicker-toggle matSuffix [for]="deadline"></mat-datepicker-toggle>
       <mat-datepicker #deadline></mat-datepicker>

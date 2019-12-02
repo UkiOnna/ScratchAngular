@@ -36,6 +36,7 @@ export class DialogAddSubdivisionComponent implements OnInit {
     this.selectedSubdivisionId = value;
     this.subdivisionService.getSubdivison(value).subscribe(subs => {
       this.selectedSubdivisionId = subs.id;
+      this.name=subs.name;
     });
     this.isSubdivisionChoosed = true;
   }

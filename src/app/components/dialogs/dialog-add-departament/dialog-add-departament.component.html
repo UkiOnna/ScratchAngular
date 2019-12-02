@@ -4,7 +4,7 @@
   <ng-template #thenBlock><h4 mat-dialog-title>Удаление департамента</h4></ng-template>
   
   <div mat-dialog-content>
-    <mat-form-field *ngIf="isDepartmentChoosed && !isDeleted" class="example-full-width">
+    <mat-form-field *ngIf="isDepartmentChoosed && !isDeleted">
       <input [(ngModel)]="name" matInput placeholder="Название" value="">
     </mat-form-field>
     <br>
