@@ -31,12 +31,14 @@ export class DialogAddTaskComponent implements OnInit {
   isError: boolean = false;
   isEdit: boolean = false;
   isTaskChoosed: boolean = true;
+  isDeleted: boolean = false;
   constructor(public dialogRef: MatDialogRef<DialogAddTaskComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private projectService: ProjectsService, private taskService: TasksService, private userSevice: UsersService) { }
 
   ngOnInit() {
     this.userId = this.data["userId"];
     this.isEdit = this.data["isEdit"];
-    if (this.isEdit) {
+    this.isDeleted = this.data["isDeleted"];
+    if (this.isEdit || this.isDeleted) {
       this.isTaskChoosed = false;
       this.taskService.getUserTasks(this.userId, null).subscribe(ts => {
         this.tasks = ts;
@@ -85,6 +87,11 @@ export class DialogAddTaskComponent implements OnInit {
     this.dialogRef.close();
   }
   onYesClick(): void {
+    if (this.selectedTaskId && this.isDeleted) {
+      this.taskService.deleteTask(this.selectedTaskId);
+      this.dialogRef.close();
+      return;
+    }
     if (!!this.name && this.deadline && this.description && this.selectedProjectId && this.selecetedExecutorId) {
       this.task = {
         description: this.description,

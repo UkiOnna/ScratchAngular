@@ -1,6 +1,6 @@
 <div class="text-center">
   <h4 mat-dialog-title *ngIf="isEdit; else elseBlock">Редактирование пользователя</h4>
-  <ng-template #elseBlock><h4 mat-dialog-title *ngIf="isEdit; else thenBlock">Добавление пользователя</h4></ng-template>
+  <ng-template #elseBlock><h4 mat-dialog-title *ngIf="!isDeleted; else thenBlock">Добавление пользователя</h4></ng-template>
   <ng-template #thenBlock><h4 mat-dialog-title>Удаление пользователя</h4></ng-template>
   <div mat-dialog-content>
       <mat-form-field *ngIf="isEdit || isDeleted">
