@@ -1,5 +1,5 @@
 export class DepartmentDto {
   id: number;
   name: string;
-  subdivisionId: number;
+  subdivision_id: number;
 }

@@ -56,8 +56,8 @@ export class DialogAddProjectComponent implements OnInit {
 
   projectChanged(value): void {
     this.projectService.getProject(value).subscribe(pj => {
-      this.selectedDepartamentId = pj.departmentId;
-      this.departamentService.getDepartment(pj.departmentId).subscribe(dp => {
+      this.selectedDepartamentId = pj.department_id;
+      this.departamentService.getDepartment(pj.department_id).subscribe(dp => {
         this.selectedDepartamentName = dp.name;
       });
       this.selectedProjectId = pj.id;
@@ -78,7 +78,7 @@ export class DialogAddProjectComponent implements OnInit {
     if (this.name && this.selectedDepartamentId) {
       this.project = {
         title: this.name,
-        departmentId: this.selectedDepartamentId,
+        department_id: this.selectedDepartamentId,
         id: null
       };
       if (this.selectedProjectId) {

@@ -72,17 +72,17 @@ export class DialogAddUser implements OnInit {
 
   userChanged(value): void {
     this.userService.getUser(value).subscribe(recievedUser => {
-      this.departamentService.getDepartment(recievedUser.departmentId).subscribe(dep => {
+      this.departamentService.getDepartment(recievedUser.department_id).subscribe(dep => {
         this.selectedDepartamentName = dep.name;
         this.selectedDepartamentId = dep.id;
-        this.subdivisionService.getSubdivison(dep.subdivisionId).subscribe(sub => {
+        this.subdivisionService.getSubdivison(dep.subdivision_id).subscribe(sub => {
           this.selectedSubdivisionName = sub.name;
           this.selectedSubdivisionId = sub.id;
         });
       });
-      this.name = recievedUser.firstName;
-      this.middlename = recievedUser.middleName;
-      this.lastname = recievedUser.lastName;
+      this.name = recievedUser.firstname;
+      this.middlename = recievedUser.middlename;
+      this.lastname = recievedUser.lastname;
       this.selectedUserId = recievedUser.id;
       this.isUserChoosed = true;
     });
@@ -99,11 +99,11 @@ export class DialogAddUser implements OnInit {
     }
     if (this.name && this.lastname && this.middlename && this.selectedDepartamentId && this.selectedRoleId) {
       this.user = {
-        firstName: this.name,
-        lastName: this.lastname,
-        middleName: this.middlename,
-        departmentId: this.selectedDepartamentId,
-        roleId: this.selectedRoleId,
+        firstname: this.name,
+        lastname: this.lastname,
+        middlename: this.middlename,
+        department_id: this.selectedDepartamentId,
+        role_id: this.selectedRoleId,
         id: null
       };
 

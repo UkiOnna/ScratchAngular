@@ -1,10 +1,10 @@
 export class UserDto {
   id: number;
-  firstName: string;
-  middleName: string;
-  lastName: string;
-  roleId: number;
-  departmentId: number;
+  firstname: string;
+  middlename: string;
+  lastname: string;
+  role_id: number;
+  department_id: number;
 }
 
 export class UserLoginDto {

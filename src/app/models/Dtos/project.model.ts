@@ -1,5 +1,5 @@
 export class ProjectDto {
   id: number;
   title: string;
-  departmentId: number;
+  department_id: number;
 }

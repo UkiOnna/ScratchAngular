@@ -51,7 +51,7 @@ export class MainPageComponent implements OnInit {
 
             for (let i = 7; i <= 22; i++) {
               let isWork = false;
-              intervals.filter(interval => interval.taskId == t.id).
+              intervals.filter(interval => interval.task_id == t.id).
                 forEach(interval => isWork = this.dateIsInRange(i, interval.start, interval.end));
               let intervalCell: IntervalCellViewModel = {
                 hour: i,
@@ -62,7 +62,7 @@ export class MainPageComponent implements OnInit {
 
             let element: TaskViewModel = {
               id: t.id,
-              projectName: projects.find(p => p.id == t.projectId).title,
+              projectName: projects.find(p => p.id == t.project_id).title,
               taskName: t.title,
               intervalCells: intervalCells
             };
