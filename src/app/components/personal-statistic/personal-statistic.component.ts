@@ -6,6 +6,8 @@ import { IntervalsService } from 'src/app/services/intervals.service';
 import { UserDto } from 'src/app/models/Dtos/user.model';
 import { FormControl } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material';
+import { UsersService } from 'src/app/services/users.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-personal-statistic',
@@ -18,16 +20,22 @@ export class PersonalStatisticComponent implements OnInit {
 
   user: UserDto;
   tasks = new MatTableDataSource([]);
-  
+
   startDate = new FormControl(new Date());
   endDate = new FormControl(new Date());
   searchValue = '';
 
   constructor(private tasksService: TasksService,
     private intervalsService: IntervalsService,
-    private projectsService: ProjectsService) { }
+    private projectsService: ProjectsService,
+    private usersService: UsersService,
+    private cookieService: CookieService) { }
 
   ngOnInit() {
+    this.usersService.getUserByToken(this.cookieService.get('token')).subscribe(result => {
+      this.user = result;
+    });
+
     this.tasksService.getPersonalStatisticTasks(this.user.id, this.startDate.value, this.endDate.value).subscribe(result => {
       this.tasks.data = result;
     });

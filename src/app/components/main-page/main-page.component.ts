@@ -8,6 +8,8 @@ import { TaskViewModel } from 'src/app/models/Views/taskView.model';
 import { IntervalCellViewModel } from 'src/app/models/Views/intervalCellView.model';
 import { MatTableDataSource } from '@angular/material';
 import { FileService } from 'src/app/services/files.service';
+import { UsersService } from 'src/app/services/users.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-main-page',
@@ -26,9 +28,16 @@ export class MainPageComponent implements OnInit {
 
   constructor(private tasksService: TasksService,
     private intervalsService: IntervalsService,
-    private projectsService: ProjectsService,private fileService:FileService) { }
+    private projectsService: ProjectsService, 
+    private fileService:FileService,
+    private usersService: UsersService,
+    private cookieService: CookieService) { }
 
   ngOnInit() {
+    this.usersService.getUserByToken(this.cookieService.get('token')).subscribe(result => {
+      this.user = result;
+    });
+
     for (let i = 7; i <= 22; i++) {
       this.displayedColumns.push(i.toString());
       this.hoursColumns.push(i.toString());
