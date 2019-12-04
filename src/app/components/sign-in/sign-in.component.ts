@@ -22,12 +22,13 @@ export class SignInComponent implements OnInit {
 
   public signIn() {
     if (this.login && this.password) {
-      let user: UserLoginDto = { login: this.login, password: this.password };
+      let user: UserLoginDto = { username: this.login, password: this.password };
       this.usersService.signIn(user).subscribe(result => this.goToProfile(result));
     }
   }
 
   public goToProfile(result: string) {
+    console.log(result);
     if (!!result) {
       this.cookieService.set('token', result);
       this.router.navigate(['/main-page/']);

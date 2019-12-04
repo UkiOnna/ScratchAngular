@@ -8,6 +8,6 @@ export class UserDto {
 }
 
 export class UserLoginDto {
-  login: string;
+  username: string;
   password: string;
 }

@@ -13,7 +13,7 @@ export class UsersService {
   constructor(private http: HttpClient) { }
 
   public signIn(user: UserLoginDto): Observable<string> {
-    return this.http.post<string>(this.root + "/sign-in", user);
+    return this.http.post<string>(this.root + "/sign-in",user);
   }
 
   public signUp(user: UserDto): Observable<any> {

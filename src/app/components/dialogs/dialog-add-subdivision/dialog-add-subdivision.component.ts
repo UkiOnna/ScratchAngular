@@ -60,6 +60,7 @@ export class DialogAddSubdivisionComponent implements OnInit {
         this.dialogRef.close();
         return;
       }
+      console.log("sfd");
       this.subdivisionService.addSubdivision(this.subdivision);
       this.dialogRef.close();
       return;

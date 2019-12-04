@@ -20,7 +20,7 @@ export class SubdivisionsService {
   }
 
   public addSubdivision(subdivision: SubdivisionDto): Observable<any> {
-    return this.http.post(this.root, SubdivisionDto);
+    return this.http.post(this.root+"/add/", subdivision);
   }
 
   public updateSubdivision(subdivision: SubdivisionDto): Observable<any> {
