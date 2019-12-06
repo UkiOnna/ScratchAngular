@@ -58,7 +58,7 @@ export class DialogAddDepartamentComponent implements OnInit {
   }
   onYesClick(): void {
     if (this.selectedDepartamentId && this.isDeleted) {
-      this.departamentService.deleteDepartament(this.selectedDepartamentId);
+      this.departamentService.deleteDepartament(this.selectedDepartamentId).subscribe();
       this.dialogRef.close();
       return;
     }
@@ -69,11 +69,11 @@ export class DialogAddDepartamentComponent implements OnInit {
         id: this.selectedDepartamentId
       };
       if (this.selectedDepartamentId) {
-        this.departamentService.updateDepartment(this.departament);
+        this.departamentService.updateDepartment(this.departament).subscribe();
         this.dialogRef.close();
         return;
       }
-      this.departamentService.addDepartment(this.departament);
+      this.departamentService.addDepartment(this.departament).subscribe();
       this.dialogRef.close();
       return;
     }

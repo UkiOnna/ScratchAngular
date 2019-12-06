@@ -88,7 +88,7 @@ export class DialogAddTaskComponent implements OnInit {
   }
   onYesClick(): void {
     if (this.selectedTaskId && this.isDeleted) {
-      this.taskService.deleteTask(this.selectedTaskId);
+      this.taskService.deleteTask(this.selectedTaskId).subscribe();
       this.dialogRef.close();
       return;
     }
@@ -103,11 +103,11 @@ export class DialogAddTaskComponent implements OnInit {
         executor_id: this.selecetedExecutorId
       };
       if (this.selectedTaskId) {
-        this.taskService.updateTask(this.task);
+        this.taskService.updateTask(this.task).subscribe();
         this.dialogRef.close();
         return;
       }
-      this.taskService.addTask(this.task);
+      this.taskService.addTask(this.task).subscribe();
       this.dialogRef.close();
       return;
     }

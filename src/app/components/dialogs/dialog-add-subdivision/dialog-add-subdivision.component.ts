@@ -16,7 +16,7 @@ export class DialogAddSubdivisionComponent implements OnInit {
   isError: boolean = false;
   isEdit: boolean = false;
   isSubdivisionChoosed: boolean = true;
-  selectedSubdivisionId: number = null;
+  selectedSubdivisionId: number = 0;
   isDeleted: boolean = false;
 
   constructor(public dialogRef: MatDialogRef<DialogAddSubdivisionComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private subdivisionService: SubdivisionsService) { }
@@ -45,8 +45,8 @@ export class DialogAddSubdivisionComponent implements OnInit {
     this.dialogRef.close();
   }
   onYesClick(): void {
-    if (this.selectedSubdivisionId && this.isDeleted) {
-      this.subdivisionService.deleteSubdivision(this.selectedSubdivisionId);
+    if (this.selectedSubdivisionId!=0 && this.isDeleted) {
+      this.subdivisionService.deleteSubdivision(this.selectedSubdivisionId).subscribe();
       this.dialogRef.close();
       return;
     }
@@ -55,13 +55,13 @@ export class DialogAddSubdivisionComponent implements OnInit {
         name: this.name,
         id: this.selectedSubdivisionId
       };
-      if (this.selectedSubdivisionId) {
-        this.subdivisionService.updateSubdivision(this.subdivision);
+      if (this.selectedSubdivisionId!=0) {
+        this.subdivisionService.updateSubdivision(this.subdivision).subscribe();
         this.dialogRef.close();
         return;
       }
       console.log("sfd");
-      this.subdivisionService.addSubdivision(this.subdivision);
+      this.subdivisionService.addSubdivision(this.subdivision).subscribe();
       this.dialogRef.close();
       return;
     }

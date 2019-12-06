@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SubdivisionDto } from '../models/Dtos/subdivision.model';
-import { Observable } from 'rxjs';
+import { Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,8 @@ export class SubdivisionsService {
   }
 
   public addSubdivision(subdivision: SubdivisionDto): Observable<any> {
-    return this.http.post(this.root+"/add/", subdivision);
+    return this.http.post(this.root, subdivision);
+
   }
 
   public updateSubdivision(subdivision: SubdivisionDto): Observable<any> {

@@ -71,7 +71,7 @@ export class DialogAddProjectComponent implements OnInit {
   }
   onYesClick(): void {
     if (this.selectedProjectId && this.isDeleted) {
-      this.projectService.deleteProject(this.selectedProjectId);
+      this.projectService.deleteProject(this.selectedProjectId).subscribe();
       this.dialogRef.close();
       return;
     }
@@ -82,11 +82,11 @@ export class DialogAddProjectComponent implements OnInit {
         id: null
       };
       if (this.selectedProjectId) {
-        this.projectService.updateProject(this.project);
+        this.projectService.updateProject(this.project).subscribe();
         this.dialogRef.close();
         return;
       }
-      this.projectService.addProject(this.project);
+      this.projectService.addProject(this.project).subscribe();
       this.dialogRef.close();
       return;
     }

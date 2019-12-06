@@ -93,7 +93,7 @@ export class DialogAddUser implements OnInit {
   onYesClick(): void {
 
     if (this.selectedUserId && this.isDeleted) {
-      this.userService.deleteUser(this.selectedUserId);
+      this.userService.deleteUser(this.selectedUserId).subscribe();
       this.dialogRef.close();
       return;
     }
@@ -108,11 +108,11 @@ export class DialogAddUser implements OnInit {
       };
 
       if (this.selectedUserId && this.isEdit) {
-        this.userService.updateUser(this.user);
+        this.userService.updateUser(this.user).subscribe();
         this.dialogRef.close();
         return;
       }
-      this.userService.addUser(this.user);
+      this.userService.addUser(this.user).subscribe();
       this.dialogRef.close();
       return;
     }
