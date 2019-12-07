@@ -26,10 +26,13 @@ export class DialogAddUser implements OnInit {
   public selectedRoleName: string;
   public selectedUserId: number;
   public name: string;
+  public username: string;
+  public password: string;
   public middlename: string;
   public lastname: string;
   user: UserDto;
   isError: boolean = false;
+  isSelectChoosed: boolean = false;
   isEdit: boolean = false;
   isUserChoosed: boolean = true;
   isDeleted: boolean = false;
@@ -42,7 +45,9 @@ export class DialogAddUser implements OnInit {
     if (this.isEdit || this.isDeleted) {
       this.isUserChoosed = false;
       this.userService.getUsers().subscribe(users => {
+        console.log(users);
         this.users = users;
+        console.log(this.users);
       });
     }
 
@@ -72,19 +77,25 @@ export class DialogAddUser implements OnInit {
 
   userChanged(value): void {
     this.userService.getUser(value).subscribe(recievedUser => {
-      this.departamentService.getDepartment(recievedUser.department_id).subscribe(dep => {
+      this.selectedDepartamentId = recievedUser.departmentId;
+      this.name = recievedUser.firstName;
+      this.username = recievedUser.username;
+      this.password = recievedUser.password;
+      this.middlename = recievedUser.middleName;
+      this.lastname = recievedUser.lastName;
+      this.selectedUserId = recievedUser.id;
+      this.selectedRoleName = recievedUser.username;
+      this.isUserChoosed = true;
+      this.departamentService.getDepartment(recievedUser.departmentId).subscribe(dep => {
         this.selectedDepartamentName = dep.name;
         this.selectedDepartamentId = dep.id;
-        this.subdivisionService.getSubdivison(dep.subdivision_id).subscribe(sub => {
+        this.selectedSubdivisionId = dep.subdivisionId;
+        this.subdivisionService.getSubdivison(this.selectedSubdivisionId).subscribe(sub => {
           this.selectedSubdivisionName = sub.name;
           this.selectedSubdivisionId = sub.id;
         });
       });
-      this.name = recievedUser.firstname;
-      this.middlename = recievedUser.middlename;
-      this.lastname = recievedUser.lastname;
-      this.selectedUserId = recievedUser.id;
-      this.isUserChoosed = true;
+      this.isSelectChoosed=true;
     });
   }
   onNoClick(): void {
@@ -97,13 +108,15 @@ export class DialogAddUser implements OnInit {
       this.dialogRef.close();
       return;
     }
-    if (this.name && this.lastname && this.middlename && this.selectedDepartamentId && this.selectedRoleId) {
+    if (this.name && this.lastname && this.middlename && this.selectedDepartamentId && this.selectedRoleId && this.username && this.password) {
       this.user = {
-        firstname: this.name,
-        lastname: this.lastname,
-        middlename: this.middlename,
-        department_id: this.selectedDepartamentId,
-        role_id: this.selectedRoleId,
+        username: this.username,
+        password: this.password,
+        firstName: this.name,
+        lastName: this.lastname,
+        middleName: this.middlename,
+        departmentId: this.selectedDepartamentId,
+        roleId: this.selectedRoleId,
         id: null
       };
 

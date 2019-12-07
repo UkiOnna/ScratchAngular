@@ -65,7 +65,7 @@ export class DialogAddDepartamentComponent implements OnInit {
     if (this.name && this.selectedSubdivisionId) {
       this.departament = {
         name: this.name,
-        subdivision_id: this.selectedSubdivisionId,
+        subdivisionId: this.selectedSubdivisionId,
         id: this.selectedDepartamentId
       };
       if (this.selectedDepartamentId) {

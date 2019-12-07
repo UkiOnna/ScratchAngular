@@ -34,7 +34,7 @@ export class SignInComponent implements OnInit {
       this.router.navigate(['/main-page/']);
     }
     else {
-      this.isError=true
+      this.isError=true;
     }
   }
 

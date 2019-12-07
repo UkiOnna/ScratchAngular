@@ -68,7 +68,7 @@ export class DialogAddTaskComponent implements OnInit {
       this.selecetdProjectName = proj.title;
     });
     this.userSevice.getUser(this.selecetedExecutorId).subscribe(user => {
-      this.selectedExecutorName = user.firstname;
+      this.selectedExecutorName = user.firstName;
     });
     this.selectedTaskId = value;
     this.isTaskChoosed = true;

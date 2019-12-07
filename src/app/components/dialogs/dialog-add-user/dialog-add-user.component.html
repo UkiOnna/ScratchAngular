@@ -6,8 +6,16 @@
       <mat-form-field *ngIf="isEdit || isDeleted">
           <mat-label>Пользователь</mat-label>
           <mat-select placeholder="Пользователь" (selectionChange)="userChanged($event.value)">
-            <mat-option *ngFor="let item of users" [value]="item.id">{{item.firstname}}</mat-option>
+            <mat-option *ngFor="let item of users" [value]="item.id">{{item.username}}</mat-option>
           </mat-select>
+        </mat-form-field>
+        <br>
+        <mat-form-field *ngIf="isUserChoosed && !isDeleted">
+          <input [(ngModel)]="username" matInput placeholder="Логин" value="">
+        </mat-form-field>
+        <br>
+        <mat-form-field *ngIf="isUserChoosed && !isDeleted">
+          <input [(ngModel)]="password" matInput placeholder="Пароль" value="">
         </mat-form-field>
         <br>
     <mat-form-field *ngIf="isUserChoosed && !isDeleted">
@@ -38,7 +46,7 @@
     <br>
     <mat-form-field *ngIf="isUserChoosed && !isDeleted">
       <mat-label>Департамент</mat-label>
-      <mat-select [(ngModel)]="selectedDepartamentName" (selectionChange)="departamentChanged($event.value)" placeholder="Департамент">
+      <mat-select [(ngModel)]="selectedDepartamentName" placeholder="Департамент" (selectionChange)="departamentChanged($event.value)" >
         <mat-option *ngFor="let item of departaments" [value]="item.id">{{item.name}}</mat-option>
       </mat-select>
     </mat-form-field>

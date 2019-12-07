@@ -34,8 +34,8 @@ export class TasksComponent implements OnInit {
               id: r.id,
               title: r.title,
               deadline: r.deadline,
-              creatorName: cu.lastname + cu.firstname,
-              executorName: eu.lastname + eu.firstname
+              creatorName: cu.lastName + cu.firstName,
+              executorName: eu.lastName + eu.firstName
             };
             this.tasks.data.push(task);
           });

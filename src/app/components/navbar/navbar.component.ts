@@ -25,7 +25,7 @@ export class NavbarComponent implements OnInit {
     let cookieValue = this.cookieService.get("token");
     if (!!cookieValue) {
       this.userSerivce.getUserByToken(cookieValue).subscribe(user => {
-        switch (user.role_id) {
+        switch (user.roleId) {
           case 4:
             this.isAdmin = true;
             break;
