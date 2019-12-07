@@ -9,11 +9,11 @@ import { RoleDto } from '../models/Dtos/role.model';
 })
 export class UsersService {
 
-  private root = "./api/users"
+  private root = "/api/auth"
   constructor(private http: HttpClient) { }
 
-  public signIn(user: UserLoginDto): Observable<string> {
-    return this.http.post<string>(this.root + "/sign-in",user);
+  public signIn(user: UserLoginDto): Observable<any> {
+    return this.http.post(this.root + "/sign-in",user,{responseType:'text'});
   }
 
   public signUp(user: UserDto): Observable<any> {
@@ -29,7 +29,7 @@ export class UsersService {
   }
 
   public getUserByToken(userToken: string): Observable<UserDto> {
-    return this.http.get<UserDto>(this.root + "/" + userToken);
+    return this.http.get<UserDto>(this.root + "/token/" + userToken);
   }
 
   public getDepartmentUsers(departmentId: number): Observable<UserDto[]> {
@@ -48,6 +48,10 @@ export class UsersService {
     return this.http.get<RoleDto[]>("/api/roles");
   }
 
+  public getRoleById(roleId: number): Observable<RoleDto> {
+    return this.http.get<RoleDto>("/api/roles/" + roleId);
+  }
+
   public getRoleByUserId(roleId: number): Observable<RoleDto> {
     return this.http.get<RoleDto>(this.root + "/roles/" + roleId);
   }
@@ -56,7 +60,7 @@ export class UsersService {
     return this.http.get<UserDto[]>(this.root);
   }
   public addUser(user: UserDto): Observable<UserDto> {
-    return this.http.post<UserDto>(this.root + "/add", user);
+    return this.http.post<UserDto>(this.root, user);
   }
   public deleteUser(userId: number): Observable<any> {
     return this.http.delete(this.root + "/" + userId);
