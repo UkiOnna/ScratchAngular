@@ -10,6 +10,7 @@ import { MatTableDataSource } from '@angular/material';
 import { FileService } from 'src/app/services/files.service';
 import { UsersService } from 'src/app/services/users.service';
 import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-page',
@@ -28,45 +29,51 @@ export class MainPageComponent implements OnInit {
 
   constructor(private tasksService: TasksService,
     private intervalsService: IntervalsService,
-    private projectsService: ProjectsService, 
-    private fileService:FileService,
+    private projectsService: ProjectsService,
+    private fileService: FileService,
     private usersService: UsersService,
-    private cookieService: CookieService) { }
+    private cookieService: CookieService,
+    private router: Router) { }
 
   ngOnInit() {
-    this.usersService.getUserByToken(this.cookieService.get('token')).subscribe(result => {
-      this.user = result;
-    });
-
-    for (let i = 7; i <= 22; i++) {
-      this.displayedColumns.push(i.toString());
-      this.hoursColumns.push(i.toString());
+    let token = this.cookieService.get('token');
+    if (!token) {
+      this.router.navigate(['/login']);
     }
 
-    this.tasksService.getUserTasks(this.user.id, this.taskDate.value).subscribe(tasks => {
-      this.intervalsService.getUserIntervals(this.user.id).subscribe(intervals => {
-        this.projectsService.getUserProjects(this.user.id).subscribe(projects => {
-          tasks.forEach(t => {
-            let intervalCells = [];
+    this.usersService.getUserByToken(token).subscribe(result => {
+      this.user = result;
 
-            for (let i = 7; i <= 22; i++) {
-              let isWork = false;
-              intervals.filter(interval => interval.task_id == t.id).
-                forEach(interval => isWork = this.dateIsInRange(i, interval.start, interval.end));
-              let intervalCell: IntervalCellViewModel = {
-                hour: i,
-                isWork: isWork
+      for (let i = 7; i <= 22; i++) {
+        this.displayedColumns.push(i.toString());
+        this.hoursColumns.push(i.toString());
+      }
+
+      this.tasksService.getUserTasks(this.user.id, this.taskDate.value).subscribe(tasks => {
+        this.intervalsService.getUserIntervals(this.user.id).subscribe(intervals => {
+          this.projectsService.getUserProjects(this.user.id).subscribe(projects => {
+            tasks.forEach(t => {
+              let intervalCells = [];
+
+              for (let i = 7; i <= 22; i++) {
+                let isWork = false;
+                intervals.filter(interval => interval.task_id == t.id).
+                  forEach(interval => isWork = this.dateIsInRange(i, interval.start, interval.end));
+                let intervalCell: IntervalCellViewModel = {
+                  hour: i,
+                  isWork: isWork
+                }
+                intervalCells.push(intervalCell);
               }
-              intervalCells.push(intervalCell);
-            }
 
-            let element: TaskViewModel = {
-              id: t.id,
-              projectName: projects.find(p => p.id == t.project_id).title,
-              taskName: t.title,
-              intervalCells: intervalCells
-            };
-            this.tasks.data.push(element);
+              let element: TaskViewModel = {
+                id: t.id,
+                projectName: projects.find(p => p.id == t.project_id).title,
+                taskName: t.title,
+                intervalCells: intervalCells
+              };
+              this.tasks.data.push(element);
+            });
           });
         });
       });
@@ -77,9 +84,9 @@ export class MainPageComponent implements OnInit {
     this.tasks.filter = filterValue.trim().toLowerCase();
   }
 
-  exportAsXLSX():void {
+  exportAsXLSX(): void {
     this.fileService.exportAsExcelFile(this.tasks.data, 'sample');
- }
+  }
 
   private dateIsInRange(requiredHour, startDate, endDate): boolean {
     let date = this.taskDate.value;

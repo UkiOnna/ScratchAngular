@@ -7,7 +7,7 @@
         </div>
         <div class="control-box">
           <div class="left d-inline-block py-3">
-            <span class="username">Lastname Firstname</span>
+            <span class="username" *ngIf="!!user">{{user.lastName}} {{user.firstName}}</span>
             <button routerLink="/personal-statistic" class="person-statistic-btn" mat-raised-button
               color="primary">Персональная статистика</button>
           </div>
