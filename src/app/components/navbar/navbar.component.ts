@@ -7,6 +7,7 @@ import { DialogAddTaskComponent } from '../dialogs/dialog-add-task/dialog-add-ta
 import { DialogAddProjectComponent } from '../dialogs/dialog-add-project/dialog-add-project.component';
 import { DialogAddDepartamentComponent } from '../dialogs/dialog-add-departament/dialog-add-departament.component';
 import { DialogAddSubdivisionComponent } from '../dialogs/dialog-add-subdivision/dialog-add-subdivision.component';
+import { TokenDto } from 'src/app/models/Dtos/token.model';
 
 @Component({
   selector: 'app-navbar',
@@ -14,17 +15,20 @@ import { DialogAddSubdivisionComponent } from '../dialogs/dialog-add-subdivision
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  public isAdmin: boolean = true;
-  public isLogin: boolean = false;
+  public isAdmin: boolean = false;
+  public isLogin: boolean = true;
   public isDepartment: boolean = false;
   public isDivision: boolean = false;
+  public token: TokenDto;
   userId: number;
   constructor(private cookieService: CookieService, private userSerivce: UsersService, public dialog: MatDialog) { }
 
   ngOnInit() {
     let cookieValue = this.cookieService.get("token");
     if (!!cookieValue) {
-      this.userSerivce.getUserByToken(cookieValue).subscribe(user => {
+      this.token = { token: cookieValue };
+      this.userSerivce.getUserByToken(this.token).subscribe(user => {
+
         switch (user.roleId) {
           case 4:
             this.isAdmin = true;
@@ -43,59 +47,66 @@ export class NavbarComponent implements OnInit {
       this.isLogin = false;
     }
   }
-  openCreateUserDialog(value,isDeleted): void {
+  signOut(): void {
+    this.isLogin = false;
+    this.cookieService.delete("token");
+    this.userSerivce.signOut(this.userId).subscribe();
+    location.reload();
+  }
+
+  openCreateUserDialog(value, isDeleted): void {
     console.log(value);
     const dialogRef = this.dialog.open(DialogAddUser, {
       height: 'auto',
       width: '400px',
-      data:{
-        isEdit:value,
-        isDeleted:isDeleted
+      data: {
+        isEdit: value,
+        isDeleted: isDeleted
       }
     });
   }
 
-  openCreateTaskDialog(value,isDeleted): void {
+  openCreateTaskDialog(value, isDeleted): void {
     const dialogRef = this.dialog.open(DialogAddTaskComponent, {
       height: 'auto',
       width: '400px',
       data: {
         userId: this.userId,
-        isEdit:value,
-        isDeleted:isDeleted
+        isEdit: value,
+        isDeleted: isDeleted
       }
     });
   }
 
-  openCreateProjectDialog(value,isDeleted): void {
+  openCreateProjectDialog(value, isDeleted): void {
     this.dialog.open(DialogAddProjectComponent, {
       height: 'auto',
       width: '400px',
-      data:{
-        isEdit:value,
-        isDeleted:isDeleted
+      data: {
+        isEdit: value,
+        isDeleted: isDeleted
       }
     });
   }
 
-  openCreateDepartamentDialog(value,isDeleted): void {
+  openCreateDepartamentDialog(value, isDeleted): void {
     this.dialog.open(DialogAddDepartamentComponent, {
       height: 'auto',
       width: '400px',
-      data:{
-        isEdit:value,
-        isDeleted:isDeleted
+      data: {
+        isEdit: value,
+        isDeleted: isDeleted
       }
     });
   }
 
-  openCreateSubdivisionDialog(value,isDeleted): void {
+  openCreateSubdivisionDialog(value, isDeleted): void {
     this.dialog.open(DialogAddSubdivisionComponent, {
       height: 'auto',
       width: '400px',
-      data:{
-        isEdit:value,
-        isDeleted:isDeleted
+      data: {
+        isEdit: value,
+        isDeleted: isDeleted
       }
     });
   }

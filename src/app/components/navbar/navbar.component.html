@@ -4,7 +4,7 @@
     <button routerLink="/projects" *ngIf="isAdmin||isDepartment||isDivision" mat-button>Статистика по департаменту</button>
     <button routerLink="/departments"  *ngIf="isAdmin||isDivision" mat-button>Статистика по подразделениям</button>
     <div class="navbar-right">
-      <button mat-button [matMenuTriggerFor]="menu">Дополнительно</button>
+      <button *ngIf="isLogin" mat-button [matMenuTriggerFor]="menu">Дополнительно</button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item [matMenuTriggerFor]="add">Добавить</button>
         <button *ngIf="isAdmin" mat-menu-item [matMenuTriggerFor]="edit">Редактировать</button>
@@ -36,7 +36,7 @@
 
       </mat-menu>
       <div *ngIf="isLogin; then thenBlock else elseBlock"></div>
-      <ng-template #thenBlock><button mat-button routerLink="/login">Выход</button></ng-template>
+      <ng-template #thenBlock><button mat-button routerLink="/login" (click)="signOut()">Выход</button></ng-template>
       <ng-template #elseBlock><button mat-button routerLink="/login">Вход</button></ng-template>
     </div>
   </mat-toolbar-row>

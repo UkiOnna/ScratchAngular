@@ -18,6 +18,10 @@ export class SignInComponent implements OnInit {
   constructor(private router: Router, private usersService: UsersService, private cookieService: CookieService) { }
 
   ngOnInit() {
+    let cookieValue = this.cookieService.get('token');
+    if (cookieValue) {
+      this.router.navigate(['/main-page']);
+    }
   }
 
   public signIn() {
@@ -26,6 +30,7 @@ export class SignInComponent implements OnInit {
       this.usersService.signIn(user).subscribe(result => {
         this.cookieService.set('token', result);
         this.router.navigate(['/main-page/']);
+        location.reload();
       }, er => {
         this.isError = true;
         console.log(er);
