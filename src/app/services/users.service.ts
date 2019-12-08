@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { UserDto, UserLoginDto } from '../models/Dtos/user.model';
 import { Observable } from 'rxjs';
 import { RoleDto } from '../models/Dtos/role.model';
+import { TokenDto } from '../models/Dtos/token.model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +29,8 @@ export class UsersService {
     return this.http.get<UserDto>(this.root + "/" + userId);
   }
 
-  public getUserByToken(userToken: string): Observable<UserDto> {
-    return this.http.get<UserDto>(this.root + "/token/" + userToken);
+  public getUserByToken(token: TokenDto): Observable<UserDto> {
+    return this.http.post<UserDto>(this.root + "/token",token);
   }
 
   public getDepartmentUsers(departmentId: number): Observable<UserDto[]> {

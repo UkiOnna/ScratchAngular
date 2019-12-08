@@ -11,6 +11,7 @@ import { FileService } from 'src/app/services/files.service';
 import { UsersService } from 'src/app/services/users.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { TokenDto } from 'src/app/models/Dtos/token.model';
 
 @Component({
   selector: 'app-main-page',
@@ -22,6 +23,7 @@ export class MainPageComponent implements OnInit {
   user: UserDto;
   taskDate = new FormControl(new Date());
   searchValue = '';
+  public token: TokenDto;
 
   displayedColumns: string[] = ['id', 'projectName', 'taskName'];
   hoursColumns: string[] = [];
@@ -36,12 +38,14 @@ export class MainPageComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    let token = this.cookieService.get('token');
-    if (!token) {
+    let cookieValue = this.cookieService.get('token');
+    if (!cookieValue) {
       this.router.navigate(['/login']);
     }
 
-    this.usersService.getUserByToken(token).subscribe(result => {
+    this.token = { token: cookieValue };
+    this.usersService.getUserByToken(this.token).subscribe(result => {
+      
       this.user = result;
 
       for (let i = 7; i <= 22; i++) {

@@ -8,6 +8,7 @@ import { FormControl } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material';
 import { UsersService } from 'src/app/services/users.service';
 import { CookieService } from 'ngx-cookie-service';
+import { TokenDto } from 'src/app/models/Dtos/token.model';
 
 @Component({
   selector: 'app-personal-statistic',
@@ -20,6 +21,7 @@ export class PersonalStatisticComponent implements OnInit {
 
   user: UserDto;
   tasks = new MatTableDataSource([]);
+  public token: TokenDto;
 
   startDate = new FormControl(new Date());
   endDate = new FormControl(new Date());
@@ -32,7 +34,9 @@ export class PersonalStatisticComponent implements OnInit {
     private cookieService: CookieService) { }
 
   ngOnInit() {
-    this.usersService.getUserByToken(this.cookieService.get('token')).subscribe(result => {
+    let cookieValue = this.cookieService.get("token");
+    this.token = { token: cookieValue };
+    this.usersService.getUserByToken(this.token).subscribe(result => {
       this.user = result;
     });
 
