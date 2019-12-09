@@ -3,6 +3,6 @@ export class TaskPersonStatisticDto {
   projectName: string;
   taskName: string;
   todayWorkTime: number;
-  allWorkTIme: number;
+  allWorkTime: number;
   taskStatus: string;
 }

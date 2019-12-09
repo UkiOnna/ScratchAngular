@@ -3,6 +3,8 @@ import { SubdivisionDto } from 'src/app/models/Dtos/subdivision.model';
 import { DepartmentDto } from 'src/app/models/Dtos/department.model';
 import { DepartmentsService } from 'src/app/services/departments.service';
 import { MatTableDataSource } from '@angular/material';
+import { ActivatedRoute } from '@angular/router';
+import { SubdivisionsService } from 'src/app/services/subdivisions.service';
 
 @Component({
   selector: 'app-departments',
@@ -11,17 +13,24 @@ import { MatTableDataSource } from '@angular/material';
 })
 export class DepartmentsComponent implements OnInit {
 
-  @Input() subdivision: SubdivisionDto;
+  id: number;
+  subdivision: SubdivisionDto;
 
   displayedColumns: string[] = ['id', 'name'];
   departments = new MatTableDataSource([]);
   searchValue = '';
 
-  constructor(private departmentsService: DepartmentsService) { }
+  constructor(private departmentsService: DepartmentsService,
+    private route: ActivatedRoute,
+    private subdivisionsService: SubdivisionsService) { }
 
   ngOnInit() {
-    this.departmentsService.getSubdivisionDepartments(this.subdivision.id).subscribe(result => {
-      this.departments.data = result;
+    this.subdivisionsService.getSubdivison(this.route.snapshot.params.id).subscribe(s => {
+      this.subdivision = s;
+
+      this.departmentsService.getSubdivisionDepartments(this.subdivision.id).subscribe(d => {
+        this.departments.data = d;
+      });
     });
   }
 

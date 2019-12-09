@@ -21,6 +21,7 @@ import { TasksComponent } from './components/tasks/tasks.component';
 import { DialogAddProjectComponent } from './components/dialogs/dialog-add-project/dialog-add-project.component';
 import { DialogAddDepartamentComponent } from './components/dialogs/dialog-add-departament/dialog-add-departament.component';
 import { DialogAddSubdivisionComponent } from './components/dialogs/dialog-add-subdivision/dialog-add-subdivision.component';
+import { SubdivisionsComponent } from './components/subdivisions/subdivisions.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { DialogAddSubdivisionComponent } from './components/dialogs/dialog-add-s
     TasksComponent,
     DialogAddProjectComponent,
     DialogAddDepartamentComponent,
-    DialogAddSubdivisionComponent
+    DialogAddSubdivisionComponent,
+    SubdivisionsComponent
   ],
   imports: [
     BrowserModule,

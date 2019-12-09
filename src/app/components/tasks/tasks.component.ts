@@ -7,6 +7,8 @@ import { MatTableDataSource } from '@angular/material';
 import { TasksService } from 'src/app/services/tasks.service';
 import { TaskFullViewModel } from 'src/app/models/Views/taskFullView.model';
 import { UsersService } from 'src/app/services/users.service';
+import { ActivatedRoute } from '@angular/router';
+import { ProjectsService } from 'src/app/services/projects.service';
 
 @Component({
   selector: 'app-tasks',
@@ -15,29 +17,35 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class TasksComponent implements OnInit {
 
-  @Input() project: ProjectDto;
+  project: ProjectDto;
 
   displayedColumns: string[] = ['id', 'name'];
   tasks = new MatTableDataSource([]);
   searchValue = '';
 
   constructor(private tasksService: TasksService,
-    private usersService: UsersService) { }
+    private usersService: UsersService,
+    private route: ActivatedRoute,
+    private projectsService: ProjectsService) { }
 
   ngOnInit() {
-    this.tasksService.getProjectTasks(this.project.id).subscribe(result => {
-      this.tasks.data = [];
-      result.forEach(r => {
-        this.usersService.getUser(r.creator_id).subscribe(cu => {
-          this.usersService.getUser(r.executor_id).subscribe(eu => {
-            let task: TaskFullViewModel = {
-              id: r.id,
-              title: r.title,
-              deadline: r.deadline,
-              creatorName: cu.lastName + cu.firstName,
-              executorName: eu.lastName + eu.firstName
-            };
-            this.tasks.data.push(task);
+    this.projectsService.getProject(this.route.snapshot.params.id).subscribe(p => {
+      this.project = p;
+
+      this.tasksService.getProjectTasks(this.project.id).subscribe(result => {
+        this.tasks.data = [];
+        result.forEach(r => {
+          this.usersService.getUser(r.creator_id).subscribe(cu => {
+            this.usersService.getUser(r.executor_id).subscribe(eu => {
+              let task: TaskFullViewModel = {
+                id: r.id,
+                title: r.title,
+                deadline: r.deadline,
+                creatorName: cu.lastName + cu.firstName,
+                executorName: eu.lastName + eu.firstName
+              };
+              this.tasks.data.push(task);
+            });
           });
         });
       });
