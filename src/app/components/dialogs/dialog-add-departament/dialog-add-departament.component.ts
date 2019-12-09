@@ -16,7 +16,7 @@ export class DialogAddDepartamentComponent implements OnInit {
   public subDivisions: SubdivisionDto[] = [];
   public departaments: DepartmentDto[] = [];
   selectedSubdivisionId: number;
-  selectedDepartamentId: number = null;
+  selectedDepartamentId: number = 0;
   departament: DepartmentDto;
   isError: boolean = false;
   isEdit: boolean = false;
@@ -73,6 +73,7 @@ export class DialogAddDepartamentComponent implements OnInit {
         this.dialogRef.close();
         return;
       }
+      debugger;
       this.departamentService.addDepartment(this.departament).subscribe();
       this.dialogRef.close();
       return;

@@ -72,7 +72,7 @@ export class MainPageComponent implements OnInit {
 
               let element: TaskViewModel = {
                 id: t.id,
-                projectName: projects.find(p => p.id == t.project_id).title,
+                projectName: projects.find(p => p.id == t.projectId).title,
                 taskName: t.title,
                 intervalCells: intervalCells
               };

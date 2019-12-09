@@ -26,7 +26,7 @@ export class DialogAddTaskComponent implements OnInit {
   selecetdProjectName: string;
   selectedExecutorName: string;
   selectedProjectId: number;
-  selectedTaskId: number;
+  selectedTaskId: number = 0;
   task: TaskDto;
   isError: boolean = false;
   isEdit: boolean = false;
@@ -61,8 +61,8 @@ export class DialogAddTaskComponent implements OnInit {
       this.name = task.title;
       this.deadline.setValue(task.deadline);
       this.description = task.description;
-      this.selecetedExecutorId = task.executor_id;
-      this.selectedProjectId = task.project_id;
+      this.selecetedExecutorId = task.executorId;
+      this.selectedProjectId = task.projectId;
     });
     this.projectService.getProject(this.selectedProjectId).subscribe(proj => {
       this.selecetdProjectName = proj.title;
@@ -97,10 +97,10 @@ export class DialogAddTaskComponent implements OnInit {
         description: this.description,
         deadline: this.deadline.value,
         title: this.name,
-        creator_id: this.userId,
-        project_id: this.selectedProjectId,
-        id: null,
-        executor_id: this.selecetedExecutorId
+        creatorId: this.userId,
+        projectId: this.selectedProjectId,
+        id: this.selectedTaskId,
+        executorId: this.selecetedExecutorId
       };
       if (this.selectedTaskId) {
         this.taskService.updateTask(this.task).subscribe();

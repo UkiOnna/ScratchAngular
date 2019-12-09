@@ -21,7 +21,7 @@ export class DialogAddProjectComponent implements OnInit {
   selectedDepartamentId: number;
   selectedDepartamentName: string;
   selectedSubdivisionName: string;
-  selectedProjectId: number;
+  selectedProjectId: number= 0;
   project: ProjectDto;
   isError: boolean = false;
   isEdit: boolean = false;
@@ -79,7 +79,7 @@ export class DialogAddProjectComponent implements OnInit {
       this.project = {
         title: this.name,
         department_id: this.selectedDepartamentId,
-        id: null
+        id: this.selectedProjectId
       };
       if (this.selectedProjectId) {
         this.projectService.updateProject(this.project).subscribe();

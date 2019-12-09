@@ -24,7 +24,7 @@ export class DialogAddUser implements OnInit {
   public selectedSubdivisionName: string;
   public selectedRoleId: number;
   public selectedRoleName: string;
-  public selectedUserId: number;
+  public selectedUserId: number = 0;
   public name: string;
   public username: string;
   public password: string;
@@ -95,7 +95,7 @@ export class DialogAddUser implements OnInit {
           this.selectedSubdivisionId = sub.id;
         });
       });
-      this.isSelectChoosed=true;
+      this.isSelectChoosed = true;
     });
   }
   onNoClick(): void {
@@ -117,7 +117,7 @@ export class DialogAddUser implements OnInit {
         middleName: this.middlename,
         departmentId: this.selectedDepartamentId,
         roleId: this.selectedRoleId,
-        id: null
+        id: this.selectedUserId
       };
 
       if (this.selectedUserId && this.isEdit) {
