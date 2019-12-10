@@ -8,6 +8,8 @@ import { DialogAddProjectComponent } from '../dialogs/dialog-add-project/dialog-
 import { DialogAddDepartamentComponent } from '../dialogs/dialog-add-departament/dialog-add-departament.component';
 import { DialogAddSubdivisionComponent } from '../dialogs/dialog-add-subdivision/dialog-add-subdivision.component';
 import { TokenDto } from 'src/app/models/Dtos/token.model';
+import { DepartmentDto } from 'src/app/models/Dtos/department.model';
+import { DepartmentsService } from 'src/app/services/departments.service';
 
 @Component({
   selector: 'app-navbar',
@@ -21,25 +23,35 @@ export class NavbarComponent implements OnInit {
   public isDivision: boolean = false;
   public token: TokenDto;
   userId: number;
-  constructor(private cookieService: CookieService, private userSerivce: UsersService, public dialog: MatDialog) { }
+
+  userDepartmentId: number;
+  userSubdivisionId: number;
+
+  constructor(private cookieService: CookieService,
+    private userSerivce: UsersService,
+    private dialog: MatDialog,
+    private departmentsService: DepartmentsService) { }
 
   ngOnInit() {
     let cookieValue = this.cookieService.get("token");
     if (!!cookieValue) {
       this.token = { token: cookieValue };
       this.userSerivce.getUserByToken(this.token).subscribe(user => {
-
         switch (user.roleId) {
-          case 4:
+          case 8:
             this.isAdmin = true;
             break;
-          case 3:
+          case 7:
             this.isDivision = true;
             break;
-          case 2:
+          case 6:
             this.isDepartment = true;
         }
         this.userId = user.id;
+        this.userDepartmentId = user.departmentId;
+        this.departmentsService.getDepartment(this.userDepartmentId).subscribe(department => {
+          this.userSubdivisionId = department.subdivisionId
+        });
       });
       this.isLogin = true;
     }

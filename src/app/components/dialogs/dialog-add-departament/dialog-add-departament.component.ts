@@ -74,7 +74,6 @@ export class DialogAddDepartamentComponent implements OnInit {
         this.dialogRef.close();
         return;
       }
-      debugger;
       this.departamentService.addDepartment(this.departament).subscribe();
       this.dialogRef.close();
       return;
