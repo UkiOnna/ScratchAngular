@@ -38,7 +38,7 @@ export class DialogAddDepartamentComponent implements OnInit {
 
   subDivisionChanged(value): void {
     this.selectedSubdivisionId = value;
-    if (this.isEdit) {
+    if (this.isEdit || this.isDeleted) {
       this.departamentService.getSubdivisionDepartments(value).subscribe(deps => {
         this.departaments = deps;
       });
@@ -49,6 +49,7 @@ export class DialogAddDepartamentComponent implements OnInit {
     this.departamentService.getDepartment(value).subscribe(dep => {
       this.name = dep.name;
     });
+
     this.isDepartmentChoosed = true;
     this.selectedDepartamentId = value;
   }
