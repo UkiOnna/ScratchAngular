@@ -7,6 +7,7 @@ import { TasksService } from 'src/app/services/tasks.service';
 import { FormControl } from '@angular/forms';
 import { UserDto } from 'src/app/models/Dtos/user.model';
 import { UsersService } from 'src/app/services/users.service';
+import { RoleDto } from 'src/app/models/Dtos/role.model';
 
 @Component({
   selector: 'app-dialog-add-task',
@@ -19,6 +20,7 @@ export class DialogAddTaskComponent implements OnInit {
   public description: string;
   public deadline = new FormControl(new Date());
   userId: number;
+  userRole: RoleDto;
   selecetedExecutorId: number;
   public projects: ProjectDto[] = [];
   public tasks: TaskDto[] = [];
@@ -40,7 +42,7 @@ export class DialogAddTaskComponent implements OnInit {
     this.isDeleted = this.data["isDeleted"];
     if (this.isEdit || this.isDeleted) {
       this.isTaskChoosed = false;
-      this.taskService.getUserTasks(this.userId, null).subscribe(ts => {
+      this.taskService.getUserTasks(this.userId).subscribe(ts => {
         this.tasks = ts;
       });
     }
@@ -63,13 +65,15 @@ export class DialogAddTaskComponent implements OnInit {
       this.description = task.description;
       this.selecetedExecutorId = task.executorId;
       this.selectedProjectId = task.projectId;
+    }, () => {
+      this.projectService.getProject(this.selectedProjectId).subscribe(proj => {
+        this.selecetdProjectName = proj.title;
+      });
+      this.userSevice.getUser(this.selecetedExecutorId).subscribe(user => {
+        this.selectedExecutorName = user.firstName;
+      });
     });
-    this.projectService.getProject(this.selectedProjectId).subscribe(proj => {
-      this.selecetdProjectName = proj.title;
-    });
-    this.userSevice.getUser(this.selecetedExecutorId).subscribe(user => {
-      this.selectedExecutorName = user.firstName;
-    });
+
     this.selectedTaskId = value;
     this.isTaskChoosed = true;
   }

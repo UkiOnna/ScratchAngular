@@ -21,7 +21,7 @@ export class DialogAddProjectComponent implements OnInit {
   selectedDepartamentId: number;
   selectedDepartamentName: string;
   selectedSubdivisionName: string;
-  selectedProjectId: number= 0;
+  selectedProjectId: number = 0;
   project: ProjectDto;
   isError: boolean = false;
   isEdit: boolean = false;
@@ -56,12 +56,14 @@ export class DialogAddProjectComponent implements OnInit {
 
   projectChanged(value): void {
     this.projectService.getProject(value).subscribe(pj => {
-      this.selectedDepartamentId = pj.department_id;
-      this.departamentService.getDepartment(pj.department_id).subscribe(dp => {
-        this.selectedDepartamentName = dp.name;
-      });
+      this.selectedDepartamentId = pj.departmentId;
+
       this.selectedProjectId = pj.id;
       this.name = pj.title;
+    }, () => {
+      this.departamentService.getDepartment(this.selectedDepartamentId).subscribe(dp => {
+        this.selectedDepartamentName = dp.name;
+      });
     });
     this.isProjectChoosed = true;
   }
@@ -78,7 +80,7 @@ export class DialogAddProjectComponent implements OnInit {
     if (this.name && this.selectedDepartamentId) {
       this.project = {
         title: this.name,
-        department_id: this.selectedDepartamentId,
+        departmentId: this.selectedDepartamentId,
         id: this.selectedProjectId
       };
       if (this.selectedProjectId) {
