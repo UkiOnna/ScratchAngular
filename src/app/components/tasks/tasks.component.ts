@@ -35,8 +35,8 @@ export class TasksComponent implements OnInit {
       this.tasksService.getProjectTasks(this.project.id).subscribe(result => {
         this.tasks.data = [];
         result.forEach(r => {
-          this.usersService.getUser(r.creator_id).subscribe(cu => {
-            this.usersService.getUser(r.executor_id).subscribe(eu => {
+          this.usersService.getUser(r.creatorId).subscribe(cu => {
+            this.usersService.getUser(r.executorId).subscribe(eu => {
               let task: TaskFullViewModel = {
                 id: r.id,
                 title: r.title,

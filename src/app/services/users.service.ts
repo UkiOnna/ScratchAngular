@@ -53,8 +53,8 @@ export class UsersService {
     return this.http.get<RoleDto>("/api/roles/" + roleId);
   }
 
-  public getRoleByUserId(roleId: number): Observable<RoleDto> {
-    return this.http.get<RoleDto>(this.root + "/roles/" + roleId);
+  public getRoleByUserId(userId: number): Observable<RoleDto> {
+    return this.http.get<RoleDto>("/api/roles/user"+userId);
   }
 
   public getUsers(): Observable<UserDto[]> {

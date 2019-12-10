@@ -29,8 +29,12 @@ export class TasksService {
     return this.http.put(this.root + '/' + task.id, task);
   }
 
-  public getUserTasks(userId: number, date: Date): Observable<TaskDto[]> {
-    return this.http.get<TaskDto[]>(this.root + "/user-tasks/" + userId + "/" + date);
+  public getUserTasks(userId: number): Observable<TaskDto[]> {
+    return this.http.get<TaskDto[]>(this.root + "/user-tasks/" + userId);
+  }
+
+  public getUserTasksByDate(userId: number, date: Date): Observable<TaskDto[]> {
+    return this.http.get<TaskDto[]>(this.root + "/user-tasks/" + userId);
   }
 
   public getPersonalStatisticTasks(userId: number, startDate: Date, endDate: Date): Observable<TaskPersonStatisticDto[]> {

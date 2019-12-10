@@ -53,7 +53,7 @@ export class MainPageComponent implements OnInit {
         this.hoursColumns.push(i.toString());
       }
 
-      this.tasksService.getUserTasks(this.user.id, this.taskDate.value).subscribe(tasks => {
+      this.tasksService.getUserTasksByDate(this.user.id, this.taskDate.value).subscribe(tasks => {
         this.intervalsService.getUserIntervals(this.user.id).subscribe(intervals => {
           this.projectsService.getUserProjects(this.user.id).subscribe(projects => {
             tasks.forEach(t => {

@@ -2,7 +2,7 @@ export class TaskDto {
   id: number;
   title: string;
   description: string;
-  deadline: string;
+  deadline: Date;
   creatorId: number;
   executorId:number;
   projectId: number;
