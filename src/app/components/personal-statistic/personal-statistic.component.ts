@@ -24,7 +24,7 @@ export class PersonalStatisticComponent implements OnInit {
   public token: TokenDto;
 
   startDate = new FormControl(new Date());
-  endDate = new FormControl(new Date());
+  endDate = new FormControl(new Date("2020-01-05T09:05:05.035Z"));
   searchValue = '';
 
   constructor(private tasksService: TasksService,
@@ -38,10 +38,12 @@ export class PersonalStatisticComponent implements OnInit {
     this.token = { token: cookieValue };
     this.usersService.getUserByToken(this.token).subscribe(result => {
       this.user = result;
-    });
+      let date=this.endDate.value.toDateString();
+      debugger;
+      this.tasksService.getPersonalStatisticTasks(this.user.id, this.startDate.value, this.endDate.value).subscribe(result => {
 
-    this.tasksService.getPersonalStatisticTasks(this.user.id, this.startDate.value, this.endDate.value).subscribe(result => {
-      this.tasks.data = result;
+        this.tasks.data = result;
+      });
     });
   }
 

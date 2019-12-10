@@ -34,11 +34,11 @@ export class TasksService {
   }
 
   public getUserTasksByDate(userId: number, date: Date): Observable<TaskDto[]> {
-    return this.http.get<TaskDto[]>(this.root + "/user-tasks/" + userId);
+    return this.http.get<TaskDto[]>(this.root + "/user-tasks/" + userId + '/' + date.toDateString());
   }
 
   public getPersonalStatisticTasks(userId: number, startDate: Date, endDate: Date): Observable<TaskPersonStatisticDto[]> {
-    return this.http.get<TaskPersonStatisticDto[]>(this.root + "/personal-statistics/" + userId + "/" + startDate + "/" + endDate);
+    return this.http.get<TaskPersonStatisticDto[]>(this.root + "/personal-statistics/" + userId + "/" + startDate.toDateString() + "/" + endDate.toDateString());
   }
 
   public getProjectUserWorkOnTheTasks(projectId: number, startDate: Date, endDate: Date): Observable<UserWorkOnTheTaskDto[]> {
