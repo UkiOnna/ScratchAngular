@@ -3,7 +3,7 @@ import { DepartmentDto } from 'src/app/models/Dtos/department.model';
 import { MatTableDataSource } from '@angular/material';
 import { ProjectsService } from 'src/app/services/projects.service';
 import { DepartmentsService } from 'src/app/services/departments.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-projects',
@@ -20,7 +20,8 @@ export class ProjectsComponent implements OnInit {
 
   constructor(private projectsService: ProjectsService,
     private departmentsService: DepartmentsService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
     this.departmentsService.getDepartment(this.route.snapshot.params.id).subscribe(d => {
@@ -34,5 +35,9 @@ export class ProjectsComponent implements OnInit {
 
   applyFilter(filterValue: string) {
     this.projects.filter = filterValue.trim().toLowerCase();
+  }
+
+  open(id: number) {
+    this.router.navigate(['/tasks/' + id.toString()]);
   }
 }

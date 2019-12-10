@@ -3,7 +3,7 @@
     <div class="col-12 px-0">
       <div class="header">
         <div class="title">
-          Департаменты подразделения -
+          Департаменты подразделения - {{subdivision.name}}
         </div>
         <div class="control-box">
           <div class="left d-inline-block">
@@ -31,7 +31,8 @@
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" style="cursor: pointer" (click)="open(row.id)">
+            </tr>
           </table>
           <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
         </div>
