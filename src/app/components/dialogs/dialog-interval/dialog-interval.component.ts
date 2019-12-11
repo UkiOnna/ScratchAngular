@@ -17,8 +17,8 @@ export class DialogIntervalComponent implements OnInit {
   public taskName: string = "";
   public projectName: string = "";
   public descriptionText: string = "";
-  public firstInterval: Date;
-  public secondInterval: Date;
+  public firstInterval: string;
+  public secondInterval: string;
   public comment: string;
   isError: boolean;
   constructor(public dialogRef: MatDialogRef<DialogIntervalComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private intervalService: IntervalsService, private taskService: TasksService,
@@ -28,7 +28,7 @@ export class DialogIntervalComponent implements OnInit {
     this.taskService.getTask(this.data['id']).subscribe(t => {
       this.taskName = t.title;
       this.descriptionText = t.description;
-      this.projectService.getTaskProjects(t.id).subscribe(p => {
+      this.projectService.getTaskProject(t.id).subscribe(p => {
         this.projectName = p.title;
       });
     })
@@ -39,14 +39,26 @@ export class DialogIntervalComponent implements OnInit {
   }
   onYesClick(): void {
     if (!!this.firstInterval && this.secondInterval && this.comment) {
+      let firstDate = new Date();
+      let secondDate = new Date();
+      let firstIntervals = this.firstInterval.split(':');
+  
+      firstDate.setHours(Number.parseInt(firstIntervals[0]));
+      firstDate.setMinutes(Number.parseInt(firstIntervals[1]));
+
+      let secondIntervals = this.secondInterval.split(':');
+  
+      secondDate.setHours(Number.parseInt(secondIntervals[0]));
+      secondDate.setMinutes(Number.parseInt(secondIntervals[1]));
+      
       this.interval = {
-        start: this.firstInterval,
-        end: this.secondInterval,
+        startDate: firstDate,
+        endDate: secondDate,
         taskId: this.data['id'],
         comment: this.comment,
         id: 0
       };
-      this.intervalService.updateInterval(this.interval).subscribe();
+      this.intervalService.addInterval(this.interval).subscribe();
       this.dialogRef.close();
       return;
     }

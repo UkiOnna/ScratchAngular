@@ -75,12 +75,13 @@ export class MainPageComponent implements OnInit {
               for (let i = 7; i <= 22; i++) {
                 let isWork = false;
                 intervals.filter(interval => interval.taskId == t.id).
-                  forEach(interval => isWork = this.dateIsInRange(i, interval.start, interval.end));
+                  forEach(interval => isWork = this.dateIsInRange(i, interval.startDate, interval.endDate));
                 let intervalCell: IntervalCellViewModel = {
                   id: counter,
                   hour: i,
                   isWork: isWork
                 }
+
                 intervalCells.push(intervalCell);
 
               }
@@ -122,13 +123,18 @@ export class MainPageComponent implements OnInit {
   }
 
   exportAsXLSX(): void {
-    this.fileService.exportAsExcelFile(this.tasks.data, 'sample');
+    this.fileService.exportAsExcelFile(this.tasks.data, 'tasksTable');
   }
 
   private dateIsInRange(requiredHour, startDate, endDate): boolean {
+    let tempStartDate = new Date(startDate);
+    let tempEndDate = new Date(endDate);
     let date = this.taskDate.value;
     date.hour = requiredHour;
-    return startDate <= date >= endDate;
+    let s1 = tempStartDate.getHours() <= date.hour;
+    let s2 = date.hour <= tempEndDate.getHours();
+    let res = s1 && s2;
+    return res;
   }
 
   public getNumber(str: string): number {

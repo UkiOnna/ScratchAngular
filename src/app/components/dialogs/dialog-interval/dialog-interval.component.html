@@ -1,23 +1,29 @@
 <div class="text-center">
-    <mat-label>{{taskName}}</mat-label>
-    <mat-label>{{projectName}}</mat-label>
+  <mat-label>{{taskName}}</mat-label>
+  <br>
+  <mat-label>Проект {{projectName}}</mat-label>
   <div mat-dialog-content>
     <mat-form-field>
-      <textarea [(ngModel)]="descriptionText" matInput placeholder="Описание"></textarea>
+      <textarea readonly [(ngModel)]="descriptionText" matInput placeholder="Описание"></textarea>
     </mat-form-field>
     <br>
     <mat-form-field>
-      <mat-label>От:</mat-label>
-      <ngx-timepicker-field [format]="24"></ngx-timepicker-field>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>До:</mat-label>
-      <ngx-timepicker-field [format]="24"></ngx-timepicker-field>
+      <div>
+        <mat-label>От</mat-label>
+        <input [(ngModel)]="firstInterval" matInput type="time" id="appt" name="appt" min="07:00" max="22:00" required>
+      </div>
     </mat-form-field>
     <br>
     <mat-form-field>
-        <textarea [(ngModel)]="comment" matInput placeholder="Коментарий"></textarea>
-      </mat-form-field>
+      <div>
+        <mat-label>До</mat-label>
+        <input [(ngModel)]="secondInterval" matInput type="time" id="appt" name="appt" min="07:00" max="22:00" required>
+      </div>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <textarea [(ngModel)]="comment" matInput placeholder="Коментарий"></textarea>
+    </mat-form-field>
   </div>
   <div mat-dialog-actions>
     <button mat-button (click)="onYesClick()">Ok</button>

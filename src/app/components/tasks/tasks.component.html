@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-12 px-0">
       <div class="header">
-        <div class="title">
+        <div class="title" *ngIf="!!project">
           Задачи на проекте -{{project.title}}
         </div>
         <div class="control-box">
