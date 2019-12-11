@@ -90,11 +90,11 @@ export class MainPageComponent implements OnInit {
               };
 
               this.tasks.data.push(element);
+              this.applyFilter('');
             });
           });
         });
       });
-
     });
   }
 
