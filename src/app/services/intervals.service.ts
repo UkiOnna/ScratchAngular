@@ -26,4 +26,8 @@ export class IntervalsService {
   public addInterval(interval: IntervalDto): Observable<any> {
     return this.http.post(this.root, interval);
   }
+
+  public updateInterval(interval: IntervalDto): Observable<any> {
+    return this.http.put(this.root, interval);
+  }
 }

@@ -23,6 +23,7 @@ import { DialogAddDepartamentComponent } from './components/dialogs/dialog-add-d
 import { DialogAddSubdivisionComponent } from './components/dialogs/dialog-add-subdivision/dialog-add-subdivision.component';
 import { SubdivisionsComponent } from './components/subdivisions/subdivisions.component';
 import { DialogIntervalComponent } from './components/dialogs/dialog-interval/dialog-interval.component';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { DialogIntervalComponent } from './components/dialogs/dialog-interval/di
     MatMenuModule,
     MatFormFieldModule,
     MatOptionModule,
-    MatSelectModule
+    MatSelectModule,
+    NgxMaterialTimepickerModule,
   ],
   providers: [
     HttpClient,

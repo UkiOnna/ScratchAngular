@@ -13,6 +13,7 @@ import { DialogAddDepartamentComponent } from './components/dialogs/dialog-add-d
 import { DialogAddSubdivisionComponent } from './components/dialogs/dialog-add-subdivision/dialog-add-subdivision.component';
 import { SubdivisionsComponent } from './components/subdivisions/subdivisions.component';
 import { TasksComponent } from './components/tasks/tasks.component';
+import { DialogIntervalComponent } from './components/dialogs/dialog-interval/dialog-interval.component';
 
 
 const routes: Routes = [
@@ -29,6 +30,7 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
   providers: [CookieService],
-  entryComponents: [DialogAddUser, DialogAddTaskComponent, DialogAddProjectComponent, DialogAddDepartamentComponent, DialogAddSubdivisionComponent]
+  entryComponents: [DialogAddUser, DialogAddTaskComponent, DialogAddProjectComponent, 
+    DialogAddDepartamentComponent, DialogAddSubdivisionComponent,DialogIntervalComponent]
 })
 export class AppRoutingModule { }

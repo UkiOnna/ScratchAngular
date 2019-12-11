@@ -52,11 +52,11 @@ export class MainPageComponent implements OnInit {
     this.usersService.getUserByToken(this.token).subscribe(result => {
 
       this.user = result;
-      let counter=0;
+      let counter = 0;
       for (let i = 7; i <= 22; i++) {
         this.displayedColumns.push(i.toString());
         let hourCell: HourViewModel = {
-          id:counter,
+          id: counter,
           hour: i.toString(),
         }
         this.hoursColumns.push(hourCell);
@@ -75,7 +75,7 @@ export class MainPageComponent implements OnInit {
                 intervals.filter(interval => interval.taskId == t.id).
                   forEach(interval => isWork = this.dateIsInRange(i, interval.start, interval.end));
                 let intervalCell: IntervalCellViewModel = {
-                  id:counter,
+                  id: counter,
                   hour: i,
                   isWork: isWork
                 }
@@ -94,7 +94,7 @@ export class MainPageComponent implements OnInit {
           });
         });
       });
-      
+
     });
   }
 
@@ -113,7 +113,7 @@ export class MainPageComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogIntervalComponent, {
       height: 'auto',
       width: '400px',
-      data: obj
+      data: { id: obj.id }
     });
   }
 

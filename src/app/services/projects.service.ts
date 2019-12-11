@@ -28,6 +28,10 @@ export class ProjectsService {
     return this.http.get<ProjectDto[]>(this.root + "/user/" + userId);
   }
 
+  public getTaskProjects(taskId: number): Observable<ProjectDto> {
+    return this.http.get<ProjectDto>(this.root + "/task/" + taskId);
+  }
+
   public addProject(project: ProjectDto): Observable<any> {
     return this.http.post(this.root, project);
   }
