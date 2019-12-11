@@ -45,6 +45,7 @@ export class TasksComponent implements OnInit {
                 executorName: eu.lastName + eu.firstName
               };
               this.tasks.data.push(task);
+              this.applyFilter('');
             });
           });
         });
