@@ -9,7 +9,7 @@ import { PersonalStatisticComponent } from './components/personal-statistic/pers
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatCardModule, MatIconModule, MatToolbarModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatTableModule, MatPaginatorModule, MatMenuModule, MatOptionModule, MatSelectModule } from '@angular/material';
+import { MatCardModule, MatIconModule, MatToolbarModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatTableModule, MatPaginatorModule, MatMenuModule, MatOptionModule, MatSelectModule, MatPaginator } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
@@ -42,7 +42,7 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     DialogAddDepartamentComponent,
     DialogAddSubdivisionComponent,
     SubdivisionsComponent,
-    DialogIntervalComponent
+    DialogIntervalComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,16 +59,16 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     FormsModule,
     HttpClientModule,
     MatTableModule,
-    MatPaginatorModule,
     MatMenuModule,
     MatFormFieldModule,
     MatOptionModule,
     MatSelectModule,
     NgxMaterialTimepickerModule,
+    MatPaginatorModule
   ],
   providers: [
     HttpClient,
-    CookieService,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

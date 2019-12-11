@@ -4,5 +4,6 @@ export class TaskViewModel {
   id: number;
   projectName: string;
   taskName: string;
+  deadline: Date;
   intervalCells: IntervalCellViewModel[];
 }

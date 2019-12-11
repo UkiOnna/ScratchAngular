@@ -86,6 +86,7 @@ export class MainPageComponent implements OnInit {
                 id: t.id,
                 projectName: projects.find(p => p.id == t.projectId).title,
                 taskName: t.title,
+                deadline: t.deadline,
                 intervalCells: intervalCells
               };
 
@@ -134,5 +135,6 @@ export class MainPageComponent implements OnInit {
   updateTaskDate(value): void {
     let newDate = new Date(value);
     this.taskDate.setValue(newDate);
+    this.tasks.filteredData = this.tasks.filteredData.filter(t => t.deadline == this.taskDate.value);
   }
 }

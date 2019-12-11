@@ -38,10 +38,8 @@ export class PersonalStatisticComponent implements OnInit {
     this.token = { token: cookieValue };
     this.usersService.getUserByToken(this.token).subscribe(result => {
       this.user = result;
-      let date=this.endDate.value.toDateString();
-      debugger;
+      let date = this.endDate.value.toDateString();
       this.tasksService.getPersonalStatisticTasks(this.user.id, this.startDate.value, this.endDate.value).subscribe(result => {
-
         this.tasks.data = result;
       });
     });
@@ -50,11 +48,17 @@ export class PersonalStatisticComponent implements OnInit {
   updateStartDate(value): void {
     let newDate = new Date(value);
     this.startDate.setValue(newDate);
+    this.tasksService.getPersonalStatisticTasks(this.user.id, this.startDate.value, this.endDate.value).subscribe(result => {
+      this.tasks.data = result;
+    });
   }
 
   updateEndDate(value): void {
     let newDate = new Date(value);
-    this.startDate.setValue(newDate);
+    this.endDate.setValue(newDate);
+    this.tasksService.getPersonalStatisticTasks(this.user.id, this.startDate.value, this.endDate.value).subscribe(result => {
+      this.tasks.data = result;
+    });
   }
 
   applyFilter(filterValue: string) {
