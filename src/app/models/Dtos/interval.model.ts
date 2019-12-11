@@ -2,6 +2,6 @@ export class IntervalDto {
   id: number;
   start: Date;
   end: Date;
-  task_id: number;
+  taskId: number;
   comment: string;
 }

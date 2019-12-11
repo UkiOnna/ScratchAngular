@@ -37,16 +37,19 @@ export class NavbarComponent implements OnInit {
     if (!!cookieValue) {
       this.token = { token: cookieValue };
       this.userSerivce.getUserByToken(this.token).subscribe(user => {
-        switch (user.roleId) {
-          case 8:
-            this.isAdmin = true;
-            break;
-          case 7:
-            this.isDivision = true;
-            break;
-          case 6:
-            this.isDepartment = true;
-        }
+        this.userSerivce.getRoleById(user.roleId).subscribe(role=>{
+          switch (role.name) {
+            case 'Admin':
+              this.isAdmin = true;
+              break;
+            case 'Subdivision':
+              this.isDivision = true;
+              break;
+            case 'Department':
+              this.isDepartment = true;
+          }
+        });
+
         this.userId = user.id;
         this.userDepartmentId = user.departmentId;
         this.departmentsService.getDepartment(this.userDepartmentId).subscribe(department => {
