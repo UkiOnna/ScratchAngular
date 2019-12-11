@@ -52,9 +52,9 @@
                   <ng-container *ngIf="row.intervalCells[item.id].isWork;else elseTemplate">
                     <span style="color: green">+</span>
                   </ng-container>
-                  <ng-container #elseTemplate>
+                  <ng-template #elseTemplate>
                     <span style="color: red;">-</span>
-                  </ng-container>
+                  </ng-template>
                 </td>
               </ng-container>
             </ng-container>
