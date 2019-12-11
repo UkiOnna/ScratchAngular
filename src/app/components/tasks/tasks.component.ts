@@ -19,7 +19,7 @@ export class TasksComponent implements OnInit {
 
   project: ProjectDto;
 
-  displayedColumns: string[] = ['id', 'name'];
+  displayedColumns: string[] = ['id', 'title','deadline','creatorName','executorName'];
   tasks = new MatTableDataSource([]);
   searchValue = '';
 
