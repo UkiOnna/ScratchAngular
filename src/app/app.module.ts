@@ -22,6 +22,7 @@ import { DialogAddProjectComponent } from './components/dialogs/dialog-add-proje
 import { DialogAddDepartamentComponent } from './components/dialogs/dialog-add-departament/dialog-add-departament.component';
 import { DialogAddSubdivisionComponent } from './components/dialogs/dialog-add-subdivision/dialog-add-subdivision.component';
 import { SubdivisionsComponent } from './components/subdivisions/subdivisions.component';
+import { DialogIntervalComponent } from './components/dialogs/dialog-interval/dialog-interval.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { SubdivisionsComponent } from './components/subdivisions/subdivisions.co
     DialogAddProjectComponent,
     DialogAddDepartamentComponent,
     DialogAddSubdivisionComponent,
-    SubdivisionsComponent
+    SubdivisionsComponent,
+    DialogIntervalComponent
   ],
   imports: [
     BrowserModule,

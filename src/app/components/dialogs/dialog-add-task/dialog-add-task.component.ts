@@ -8,6 +8,7 @@ import { FormControl } from '@angular/forms';
 import { UserDto } from 'src/app/models/Dtos/user.model';
 import { UsersService } from 'src/app/services/users.service';
 import { RoleDto } from 'src/app/models/Dtos/role.model';
+import { IntervalDto } from 'src/app/models/Dtos/interval.model';
 
 @Component({
   selector: 'app-dialog-add-task',
