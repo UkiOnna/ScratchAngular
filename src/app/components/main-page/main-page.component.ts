@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserDto } from 'src/app/models/Dtos/user.model';
 import { FormControl } from '@angular/forms';
 import { TasksService } from 'src/app/services/tasks.service';
@@ -6,7 +6,7 @@ import { IntervalsService } from 'src/app/services/intervals.service';
 import { ProjectsService } from 'src/app/services/projects.service';
 import { TaskViewModel } from 'src/app/models/Views/taskView.model';
 import { IntervalCellViewModel } from 'src/app/models/Views/intervalCellView.model';
-import { MatTableDataSource, MatDialog } from '@angular/material';
+import { MatTableDataSource, MatDialog, MatPaginator } from '@angular/material';
 import { FileService } from 'src/app/services/files.service';
 import { UsersService } from 'src/app/services/users.service';
 import { CookieService } from 'ngx-cookie-service';
@@ -32,6 +32,8 @@ export class MainPageComponent implements OnInit {
   hoursColumns: HourViewModel[] = [];
   tasks = new MatTableDataSource([]);
   interval: IntervalDto;
+
+  @ViewChild(MatPaginator, null) paginator: MatPaginator;
 
   constructor(private tasksService: TasksService,
     private intervalsService: IntervalsService,
@@ -97,6 +99,7 @@ export class MainPageComponent implements OnInit {
         });
       });
     });
+    this.tasks.paginator = this.paginator;
   }
 
   applyFilter(filterValue: string) {

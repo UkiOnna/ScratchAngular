@@ -1,9 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { UserWorkOnTheTaskDto } from 'src/app/models/Dtos/userWorkOnTheTask.model';
 import { UserWorkOnTheTaskViewModel } from 'src/app/models/Views/userWorkOnTheTaskView.model';
 import { ProjectDto } from 'src/app/models/Dtos/project.model';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { TasksService } from 'src/app/services/tasks.service';
 import { TaskFullViewModel } from 'src/app/models/Views/taskFullView.model';
 import { UsersService } from 'src/app/services/users.service';
@@ -19,9 +19,11 @@ export class TasksComponent implements OnInit {
 
   project: ProjectDto;
 
-  displayedColumns: string[] = ['id', 'title','deadline','creatorName','executorName'];
+  displayedColumns: string[] = ['id', 'title', 'deadline', 'creatorName', 'executorName'];
   tasks = new MatTableDataSource([]);
   searchValue = '';
+
+  @ViewChild(MatPaginator, null) paginator: MatPaginator;
 
   constructor(private tasksService: TasksService,
     private usersService: UsersService,
@@ -51,6 +53,7 @@ export class TasksComponent implements OnInit {
         });
       });
     });
+    this.tasks.paginator = this.paginator;
   }
 
   applyFilter(filterValue: string) {

@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TaskPersonStatisticDto } from 'src/app/models/Dtos/taskPersonStatistic.model';
 import { TasksService } from 'src/app/services/tasks.service';
 import { ProjectsService } from 'src/app/services/projects.service';
 import { IntervalsService } from 'src/app/services/intervals.service';
 import { UserDto } from 'src/app/models/Dtos/user.model';
 import { FormControl } from '@angular/forms';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { UsersService } from 'src/app/services/users.service';
 import { CookieService } from 'ngx-cookie-service';
 import { TokenDto } from 'src/app/models/Dtos/token.model';
@@ -27,6 +27,8 @@ export class PersonalStatisticComponent implements OnInit {
   endDate = new FormControl(new Date("2020-01-05T09:05:05.035Z"));
   searchValue = '';
 
+  @ViewChild(MatPaginator, null) paginator: MatPaginator;
+
   constructor(private tasksService: TasksService,
     private intervalsService: IntervalsService,
     private projectsService: ProjectsService,
@@ -43,6 +45,8 @@ export class PersonalStatisticComponent implements OnInit {
         this.tasks.data = result;
       });
     });
+
+    this.tasks.paginator = this.paginator;
   }
 
   updateStartDate(value): void {

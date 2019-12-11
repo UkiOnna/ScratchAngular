@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { DepartmentDto } from 'src/app/models/Dtos/department.model';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { ProjectsService } from 'src/app/services/projects.service';
 import { DepartmentsService } from 'src/app/services/departments.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -18,6 +18,8 @@ export class ProjectsComponent implements OnInit {
   projects = new MatTableDataSource([]);
   searchValue = '';
 
+  @ViewChild(MatPaginator, null) paginator: MatPaginator;
+
   constructor(private projectsService: ProjectsService,
     private departmentsService: DepartmentsService,
     private route: ActivatedRoute,
@@ -31,6 +33,8 @@ export class ProjectsComponent implements OnInit {
         this.projects.data = p;
       });
     });
+
+    this.projects.paginator = this.paginator;
   }
 
   applyFilter(filterValue: string) {
